@@ -40,7 +40,6 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
     const { nextStep, setLesson, addProducerScore, completeLesson, reset } = useGameStore();
     const [sceneIndex, setSceneIndex] = useState(0);
     const [localDialogueIndex, setLocalDialogueIndex] = useState(0);
-    const [showInteraction, setShowInteraction] = useState(false);
 
     // 双层配图交叉淡入淡出
     const [activeLayer, setActiveLayer] = useState<0 | 1>(0);
@@ -63,7 +62,6 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
         setLesson(lessonId);
         setSceneIndex(0);
         setLocalDialogueIndex(0);
-        setShowInteraction(false);
         reset();
         playBgmForLesson(lessonId);
         // 初始化第一张图
@@ -80,19 +78,6 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
 
         // 播放点击音效
         playSfx('click');
-
-        // 处理互动触发
-        if (line?.action === 'triggerInteraction') {
-            setShowInteraction(true);
-            playSfx('whoosh');
-            // 推进到下一个场景，返回时直接进入教学内容
-            if (sceneIndex < scenes.length - 1) {
-                setSceneIndex(prev => prev + 1);
-                setLocalDialogueIndex(0);
-                nextStep();
-            }
-            return;
-        }
 
         if (line?.action === 'completeLesson' || line?.action === 'completeCourse') {
             addProducerScore(10);
@@ -139,37 +124,33 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
             if (nextLesson) {
                 router.push(`/lesson/${nextLessonId}`);
             } else {
-                // 已是最后一课，返回首页
                 router.push('/');
             }
         }
     }, [currentScene, localDialogueIndex, sceneIndex, scenes, nextStep, addProducerScore, completeLesson, lessonId, playSfx, globalDialogueIndex, activeLayer, router]);
 
-    // 渲染互动场景
-    const renderInteraction = useCallback(() => {
-        switch (lessonId) {
-            case 2: return <PricingScene />;
-            case 3: return <PromptBattleScene />;
-            case 4: return <PromptBuilderScene />;
-            case 5: return <DunningKrugerScene />;
-            case 6: return <FakeNewsScene />;
-            case 7: return <ElephantScene />;
-            case 8: return <OnionScene />;
-            case 9: return <AgentBuilderScene />;
-            case 10: return <DemoDayScene />;
-            default: return null;
-        }
-    }, [lessonId]);
-
-    // 渲染场景背景
+    // 渲染场景背景（包含互动游戏）
     const renderScene = useCallback(() => {
         if (!currentScene) return null;
         const bg = currentScene.bg;
+        const game = currentScene.game;
 
         switch (bg) {
+            // L1 专属场景
             case 'entropy': return <EntropyScene />;
             case 'dopamine': return <DopamineScene />;
             case 'ruins': return <RuinsScene />;
+            // L2-L10 互动游戏场景
+            case 'pricing': return <PricingScene game={game} />;
+            case 'promptBattle': return <PromptBattleScene game={game} />;
+            case 'promptBuilder': return <PromptBuilderScene game={game} />;
+            case 'dunningKruger': return <DunningKrugerScene game={game} />;
+            case 'fakeNews': return <FakeNewsScene game={game} />;
+            case 'elephant': return <ElephantScene game={game} />;
+            case 'onion': return <OnionScene game={game} />;
+            case 'agentBuilder': return <AgentBuilderScene game={game} />;
+            case 'demoDay': return <DemoDayScene game={game} />;
+            // 通用背景
             default: return <GenericScene bg={bg} title={lesson?.title ?? ''} icon={lesson?.icon ?? ''} />;
         }
     }, [currentScene, lesson?.title, lesson?.icon]);
@@ -212,35 +193,16 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
         <div className="relative w-full h-full overflow-hidden">
             {/* 场景背景（最底层） */}
             <AnimatePresence mode="wait">
-                {showInteraction ? (
-                    <motion.div
-                        key="interaction"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="absolute inset-0 z-10"
-                    >
-                        {renderInteraction()}
-                        <button
-                            onClick={() => setShowInteraction(false)}
-                            className="absolute top-2 right-2 md:top-4 md:right-16 z-50 bg-black/50 backdrop-blur-md rounded-full px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-gray-300 border border-white/10 hover:border-pink-500/30 transition-all"
-                        >
-                            ← 继续学习
-                        </button>
-                    </motion.div>
-                ) : (
-                    <motion.div
-                        key={currentScene?.id}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="absolute inset-0 z-0"
-                    >
-                        {renderScene()}
-                    </motion.div>
-                )}
+                <motion.div
+                    key={currentScene?.id}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="absolute inset-0 z-0"
+                >
+                    {renderScene()}
+                </motion.div>
             </AnimatePresence>
 
             {/* 配图叠加层（在场景之上） */}
@@ -265,27 +227,15 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
                 </div>
             </div>
 
-            {/* 互动按钮（当课程有互动且不在互动模式时） */}
-            {lessonId >= 2 && !showInteraction && (
-                <button
-                    onClick={() => { setShowInteraction(true); playSfx('whoosh'); }}
-                    className="absolute top-2 right-12 md:top-4 md:right-16 z-40 bg-gradient-to-r from-pink-500/20 to-purple-500/20 backdrop-blur-md rounded-lg px-2 py-1.5 md:px-4 md:py-2 border border-pink-500/30 hover:border-pink-500/50 transition-all"
-                >
-                    <span className="text-pink-400 font-bold text-xs md:text-sm">🎮 互动游戏</span>
-                </button>
-            )}
-
             {/* 静音按钮 */}
             <MuteButton isMuted={isMuted} onToggle={toggleMute} />
 
             {/* 对话框 */}
-            {!showInteraction && (
-                <DialogueBox
-                    line={currentLine}
-                    onNext={handleNext}
-                    isLastDialogue={sceneIndex === scenes.length - 1 && localDialogueIndex === (currentScene?.dialogue.length ?? 1) - 1}
-                />
-            )}
+            <DialogueBox
+                line={currentLine}
+                onNext={handleNext}
+                isLastDialogue={sceneIndex === scenes.length - 1 && localDialogueIndex === (currentScene?.dialogue.length ?? 1) - 1}
+            />
         </div>
     );
 }

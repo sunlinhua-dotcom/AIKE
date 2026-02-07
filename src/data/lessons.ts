@@ -2,8 +2,9 @@ import { DialogueLine } from '@/store/gameStore';
 
 export interface LessonScene {
     id: string;
-    bg: 'intro' | 'entropy' | 'dopamine' | 'ruins' | 'dark' | 'cyber' | 'lab' | 'market' | 'arena' | 'forge' | 'summit';
+    bg: string;
     dialogue: DialogueLine[];
+    game?: string;   // 互动游戏标识（传给场景组件的 game prop）
 }
 
 export interface LessonData {
@@ -18,51 +19,42 @@ export interface LessonData {
 // ─── Lesson 1: 时间的真相 ───────────────────────────────
 const lesson1: LessonData = {
     id: 1, title: '时间的真相', subtitle: 'The Truth About Time',
-    module: '模块一 · 时间觉醒', icon: '⏳',
+    module: '模块一 · 时间觉醒', icon: '⏰',
     scenes: [
         {
             id: 'l1-intro', bg: 'intro',
             dialogue: [
-                { speaker: '系统', avatar: '🤖', text: '检测到时空波动。正在连接 2024 年的节点... 连接成功。' },
-                { speaker: '小智', avatar: '🤖', text: '警报！警报！小米，快放下你手里的发光板（手机）！' },
-                { speaker: '小米', avatar: '🧒', text: '哎呀小智，别吵。我再刷最后一个视频... 哈哈这个猫好搞笑。' },
-                { speaker: '小智', avatar: '🤖', text: '这不是玩笑！看看你的房间！物理定律正在失效！' },
-                { speaker: '系统', avatar: '⚠️', text: '警告：局部熵值（Entropy）超过临界点。物质结构开始瓦解。' },
-                { speaker: '小米', avatar: '🧒', text: '等等... 我的书桌怎么在... 融化？我的书变成了沙子？！' },
+                { speaker: '系统', avatar: '🔮', text: '警告：检测到时间异常。目标对象——也就是你——正在大量浪费生命。' },
+                { speaker: '小智', avatar: '🤖', text: '打扰了！我是小智，你的AI导师。我有一个坏消息要告诉你。', action: 'initBlink' },
+                { speaker: '小智', avatar: '🤖', text: '每天刷3小时手机 = 每年浪费1095小时 = 45天。你已经浪费了45天的生命在看别人的生活。' },
             ],
         },
         {
             id: 'l1-entropy', bg: 'entropy',
             dialogue: [
-                { speaker: '小智', avatar: '🤖', text: '欢迎来到物理学的残酷真相：【熵增】。在这个宇宙里，混乱是自动的，秩序是昂贵的。', action: 'initEntropy' },
-                { speaker: '小智', avatar: '🤖', text: '看屏幕中间。那些发光的粒子组成了你未来的理想形态 —— 一个充满能量的人。' },
-                { speaker: '小智', avatar: '🤖', text: '大白话说就是：如果你啥都不做，你的未来就会像沙堡一样自己塌掉。不是因为有人破坏它，而是因为宇宙的规则就是这样 —— 不努力 = 自动变差。', action: 'startDecay' },
-                { speaker: '小米', avatar: '🧒', text: '它在掉渣！每秒钟都在掉！我的未来在消失！' },
-                { speaker: '小智', avatar: '🤖', text: '没错。这就是【热力学第二定律】。大白话：房间不收拾会越来越乱，身体不锻炼会越来越胖，知识不学习会越来越少。一切都在自动走向混乱。' },
-                { speaker: '系统', avatar: '🔮', text: '【互动环节】点击左边的"刷短视频"看看会发生什么，或者点击"深度思考"来对抗熵增。', action: 'enableControls' },
+                { speaker: '小智', avatar: '🤖', text: '欢迎来到\"熵增实验室\"。看屏幕中间...那些发光的粒子组成了你未来的理想形态。', action: 'initEntropy' },
+                { speaker: '小智', avatar: '🤖', text: '那些粒子看到了吗？它们代表你的未来——如果你啥都不做，你的未来就会像沙堡一样自己塌掉。', action: 'startDecay' },
+                { speaker: '系统', avatar: '⚠️', text: '它在掉渣！每秒钟都在掉！我的未来在消失！' },
+                { speaker: '小智', avatar: '🤖', text: '这就是【熵增定律】。大白话：一切都在自动走向混乱。你的房间不收拾会越来越乱，你的知识不学习会越来越少。这是宇宙的基本规则，没人能逃。' },
+                { speaker: '系统', avatar: '🔮', text: '【互动环节】点击左边的\"刷短视频\"看看会发生什么，或者点击\"深度思考\"来对抗熵增。', action: 'enableControls' },
+                { speaker: '小智', avatar: '🤖', text: '太好了！你发现了秘密：主动学习和创造可以对抗熵增。这就是这门课要教你的。' },
             ],
         },
         {
             id: 'l1-dopamine', bg: 'dopamine',
             dialogue: [
-                { speaker: '小智', avatar: '🤖', text: '现在带你去一个更危险的地方 —— 多巴胺赌场。你的大脑最喜欢来这里。', action: 'initDopamine' },
-                { speaker: '小智', avatar: '🤖', text: '大白话：多巴胺就是大脑里的"糖果小怪兽"。它不管一件事对你好不好，只管这件事爽不爽。刷视频很爽？那就疯狂分泌多巴胺，让你停不下来。' },
-                { speaker: '系统', avatar: '🧠', text: '【任务】试着点击那些闪烁的金币（快乐）。观察下方的 DOPAMINE 和 SURVIVAL RATE 数据变化。' },
-                { speaker: '小智', avatar: '🤖', text: '看到了吗？每次你获得"快乐"（多巴胺飙升），你的"生存率"就在下降。大白话：你在用注意力换快感，但注意力花完了，你就什么真本事都没学到。' },
-                { speaker: '小智', avatar: '🤖', text: '更可怕的是【耐受性】。大白话：就像吃辣一样，第一次吃微辣就觉得辣，后来要吃变态辣才有感觉。刷视频也一样，越刷越无聊，但就是停不下来。' },
+                { speaker: '小智', avatar: '🤖', text: '欢迎来到\"多巴胺赌场\"。这里展示了手机如何利用你的大脑奖赏系统来控制你。', action: 'initDopamine' },
+                { speaker: '系统', avatar: '🎰', text: '每次下拉刷新 = 一次老虎机。你永远不知道下一条是无聊的还是有趣的。正是因为不确定，你才停不下来。' },
+                { speaker: '系统', avatar: '📊', text: '你知道吗？平均每人每天拿起手机96次，每6.5分钟看一次。你被设计了。' },
             ],
         },
         {
             id: 'l1-ruins', bg: 'ruins',
             dialogue: [
-                { speaker: '小米', avatar: '🧒', text: '带我离开这里！那些数字太吓人了！', action: 'initRuins' },
-                { speaker: '神秘人', avatar: '🧙‍♂️', text: '欢迎来到未来。如你所见，因为你刚刚在赌场耗尽了能量，这里是一片废墟。' },
-                { speaker: '神秘人', avatar: '🧙‍♂️', text: '这就是【机会成本】。大白话：你选了A，就杀死了B、C、D所有其他选择。你选了1小时刷视频，就等于亲手杀死了1小时学画画、练钢琴、写代码的机会。' },
-                { speaker: '神秘人', avatar: '🧙‍♂️', text: '想修复它吗？这就是交易。把你的"游戏手柄"扔进火炉。用现在的痛苦，换未来的秩序。', action: 'enableExchange' },
-                { speaker: '系统', avatar: '⚖️', text: '【抉择】点击游戏手柄（🎮），将其献祭给未来。' },
-                { speaker: '小米', avatar: '🧒', text: '（看着废墟中开出的花）我明白了。痛苦不是惩罚，痛苦是能量。' },
-                { speaker: '小智', avatar: '🤖', text: '最后一个知识：【复利效应】。大白话：每天进步1%，一年后你会变成原来的37倍（1.01的365次方=37.78）。但每天退步1%，一年后你只剩0.03。' },
-                { speaker: '小智', avatar: '🤖', text: '欢迎觉醒，生产者。第一课结束。', action: 'completeLesson' },
+                { speaker: '小智', avatar: '🤖', text: '最后一站：选择之殿。每个选择都会影响你的未来粒子形态。', action: 'initRuins' },
+                { speaker: '小智', avatar: '🤖', text: '好消息是：【复利效应】。每天进步1%，一年后你会变成原来的37倍。每天退步1%，一年后你只剩原来的3%。' },
+                { speaker: '系统', avatar: '💡', text: '这不是鸡汤，这是数学。1.01的365次方=37.78。0.99的365次方=0.03。' },
+                { speaker: '小智', avatar: '🤖', text: '第一课结束。记住：你的时间正在被偷走，而你是唯一能夺回它的人。', action: 'completeLesson' },
             ],
         },
     ],
@@ -78,27 +70,40 @@ const lesson2: LessonData = {
             dialogue: [
                 { speaker: '小智', avatar: '🤖', text: '上一课你学到了时间的真相。今天我们要搞清楚一个更深层的问题：为什么有些人越来越富，有些人越来越穷？' },
                 { speaker: '小智', avatar: '🤖', text: '答案就藏在两个字里：【消费者】和【生产者】。' },
-                { speaker: '小智', avatar: '🤖', text: '大白话：世界上只有两种人。一种人花钱买别人做的东西（消费者），一种人做东西卖给别人（生产者）。打游戏的是消费者，做游戏的是生产者。', action: 'triggerInteraction' },
+                { speaker: '小智', avatar: '🤖', text: '大白话：世界上只有两种人。一种人花钱买别人做的东西（消费者），一种人做东西卖给别人（生产者）。打游戏的是消费者，做游戏的是生产者。' },
             ],
         },
         {
-            id: 'l2-market', bg: 'market',
+            id: 'l2-pricing', bg: 'pricing', game: 'pricing',
             dialogue: [
-                { speaker: '小智', avatar: '🤖', text: '欢迎来到价值交易所。这里展示了一个残酷的真相：【价格 ≠ 价值】。', action: 'initMarket' },
-                { speaker: '小智', avatar: '🤖', text: '大白话：一杯星巴克咖啡卖38块，但咖啡豆的成本只要3块。那多出来的35块是什么？是品牌、是体验、是故事。这就是"附加价值"。' },
-                { speaker: '系统', avatar: '📊', text: '【互动】在下方的交易模拟器中，尝试给不同的产品定价。看看消费者愿意为"创意"付多少钱。' },
-                { speaker: '小智', avatar: '🤖', text: '【边际成本】大白话：画家画第一幅画要花10小时，但把它复制成1万张海报，每张只要1秒。这就是生产者的秘密武器 —— 一次创造，无限复制。' },
-                { speaker: '小智', avatar: '🤖', text: '【睡后收入】大白话：你睡着了还在赚钱。怎么做到？写一本书、做一个App、拍一个视频课。你只做一次，但它可以被无限次购买。' },
+                { speaker: '小智', avatar: '🤖', text: '欢迎来到价值交易所。这里展示了一个残酷的真相：【价格 ≠ 价值】。' },
+                { speaker: '系统', avatar: '📊', text: '【互动】在下方的定价器中，拖动滑块猜猜每个物品值多少钱。' },
+                { speaker: '小智', avatar: '🤖', text: '一杯星巴克卖38块，咖啡豆成本3块。多出的35块是品牌、体验、故事——这就是「附加价值」。' },
             ],
         },
         {
-            id: 'l2-transform', bg: 'cyber',
+            id: 'l2-classifier', bg: 'pricing', game: 'classifier',
             dialogue: [
-                { speaker: '神秘人', avatar: '🧙‍♂️', text: '看看这面镜子。左边是消费者的一天，右边是生产者的一天。', action: 'initMirror' },
-                { speaker: '系统', avatar: '🪞', text: '消费者的一天：起床→刷手机→上学→回家→打游戏→刷视频→睡觉。循环。什么都没留下。' },
-                { speaker: '系统', avatar: '🪞', text: '生产者的一天：起床→写日记→上学→回家→用AI做了个小工具→教会了同学一个技巧→记录今天的成长→睡觉。每天都在积累。' },
-                { speaker: '小智', avatar: '🤖', text: '【注意力经济】大白话：如果一个App是免费的，那你就不是顾客，你是商品。抖音不收你的钱，但它收走了你的注意力，然后把你的注意力卖给广告商。' },
-                { speaker: '小智', avatar: '🤖', text: '从今天起，问自己一个问题：我现在是在消费，还是在生产？', action: 'completeLesson' },
+                { speaker: '小智', avatar: '🤖', text: '你现在的每个行为，要么是在消费，要么是在生产。' },
+                { speaker: '系统', avatar: '🔄', text: '【互动】把每个活动归类：它是消费行为还是生产行为？' },
+                { speaker: '小智', avatar: '🤖', text: '消费让你花时间；生产让你赚时间。记住这个区别。' },
+            ],
+        },
+        {
+            id: 'l2-passive', bg: 'pricing', game: 'passive',
+            dialogue: [
+                { speaker: '小智', avatar: '🤖', text: '【边际成本趋零】画家画第一幅画要10小时，复制成1万张海报每张只要1秒。这就是生产者的秘密武器——一次创造，无限复制。' },
+                { speaker: '系统', avatar: '😴', text: '【互动】调节参数，看看「睡后收入」有多强大。你睡着了还在赚钱！' },
+                { speaker: '小智', avatar: '🤖', text: '写一本书、做一个App、拍一个视频课——你只做一次，但它可以被无限次购买。' },
+            ],
+        },
+        {
+            id: 'l2-outro', bg: 'cyber',
+            dialogue: [
+                { speaker: '神秘人', avatar: '🧙‍♂️', text: '消费者的一天：刷手机→上学→打游戏→刷视频→睡觉。循环。什么都没留下。' },
+                { speaker: '神秘人', avatar: '🧙‍♂️', text: '生产者的一天：写日记→上学→用AI做工具→教同学技巧→记录成长→睡觉。每天都在积累。' },
+                { speaker: '小智', avatar: '🤖', text: '【注意力经济】如果App是免费的，你就不是顾客——你是商品。抖音收走你的注意力，卖给广告商。' },
+                { speaker: '小智', avatar: '🤖', text: '从今天起，问自己：我现在是在消费，还是在生产？', action: 'completeLesson' },
             ],
         },
     ],
@@ -113,19 +118,31 @@ const lesson3: LessonData = {
             id: 'l3-intro', bg: 'intro',
             dialogue: [
                 { speaker: '小智', avatar: '🤖', text: '很多人以为AI是万能的。今天我要告诉你一个真相：AI不是魔法，AI是杠杆。' },
-                { speaker: '小智', avatar: '🤖', text: '大白话：杠杆就是那个能让你用小力气撬动大石头的棍子。阿基米德说"给我一个支点，我能撬动地球"。AI就是你的数字杠杆。' },
-                { speaker: '小智', avatar: '🤖', text: '但是！杠杆需要一个支点。你的支点是什么？是你的【认知】和【判断力】。如果你自己不懂，AI再强也帮不了你。垃圾进去，垃圾出来（Garbage In, Garbage Out）。', action: 'triggerInteraction' },
+                { speaker: '小智', avatar: '🤖', text: '大白话：杠杆就是那个能让你用小力气撬动大石头的棍子。阿基米德说\"给我一个支点，我能撬动地球\"。AI就是你的数字杠杆。' },
             ],
         },
         {
-            id: 'l3-lever', bg: 'lab',
+            id: 'l3-lever', bg: 'promptBattle', game: 'lever',
             dialogue: [
-                { speaker: '小智', avatar: '🤖', text: '看这个实验：我让AI写一篇作文。', action: 'initLab' },
-                { speaker: '系统', avatar: '🧪', text: '指令A："帮我写一篇作文"→ AI输出：一篇普通的、谁都能写的作文。分数：60分。' },
-                { speaker: '系统', avatar: '🧪', text: '指令B："我是一个10岁的孩子，刚在海洋馆看到了巨型章鱼，我非常震撼。请用第一人称帮我写一篇300字的观察日记，要求有细节描写、情感变化和一个出人意料的结尾"→ AI输出：一篇生动、独特的满分作文。分数：95分。' },
-                { speaker: '小智', avatar: '🤖', text: '大白话：同样的AI，不同的人用，得到完全不同的结果。差别在哪里？在你的提问能力。这就是为什么说"提问即编程"。' },
-                { speaker: '小智', avatar: '🤖', text: '【边际成本趋零】大白话：以前请一个翻译要花500块/小时。现在用AI翻译，1秒钟，0块钱。以前请画师画一张图要3天。现在用AI，3分钟。成本降到了几乎为零。' },
-                { speaker: '小智', avatar: '🤖', text: '这意味着什么？意味着【会用AI的人】和【不会用AI的人】之间的差距，会越来越大。就像工业革命时，会用蒸汽机的工厂碾压了手工作坊。', action: 'completeLesson' },
+                { speaker: '小智', avatar: '🤖', text: '但杠杆需要一个支点。你的支点是什么？是你的【认知】和【判断力】。' },
+                { speaker: '系统', avatar: '⚖️', text: '【互动】拖动滑块提升认知水平，看看能撬动多大的石头。认知越强，AI帮你做的越多！' },
+                { speaker: '小智', avatar: '🤖', text: '如果你自己不懂，AI再强也帮不了你。垃圾进去，垃圾出来（Garbage In, Garbage Out）。' },
+            ],
+        },
+        {
+            id: 'l3-battle', bg: 'promptBattle', game: 'battle',
+            dialogue: [
+                { speaker: '小智', avatar: '🤖', text: '看这个实验：同样的AI，不同的提示词，结果天壤之别。' },
+                { speaker: '系统', avatar: '⚔️', text: '【互动】对比好提示词和烂提示词的效果差距。点击不同类别看看结果。' },
+                { speaker: '小智', avatar: '🤖', text: '差别在哪里？在你的提问能力。这就是为什么说「提问即编程」。' },
+            ],
+        },
+        {
+            id: 'l3-timeline', bg: 'promptBattle', game: 'timeline',
+            dialogue: [
+                { speaker: '小智', avatar: '🤖', text: '【边际成本趋零】以前请翻译要500块/时，现在用AI翻译——1秒钟，0块钱。' },
+                { speaker: '系统', avatar: '📉', text: '【互动】点击不同年份，看翻译、绘画、写作的成本如何暴跌到零。' },
+                { speaker: '小智', avatar: '🤖', text: '会用AI的人和不会用AI的人之间的差距，就像工业革命时蒸汽机工厂碾压手工作坊。', action: 'completeLesson' },
             ],
         },
     ],
@@ -140,18 +157,31 @@ const lesson4: LessonData = {
             id: 'l4-intro', bg: 'intro',
             dialogue: [
                 { speaker: '小智', avatar: '🤖', text: '上一课说了AI是杠杆。今天我们来锻造这根杠杆的关键部件：提问能力。' },
-                { speaker: '小智', avatar: '🤖', text: '你知道吗？在Google工作的人，最重要的技能不是写代码，而是【提问】。因为你问对了问题，答案自然就出来了。', action: 'triggerInteraction' },
+                { speaker: '小智', avatar: '🤖', text: '你知道吗？在Google工作的人，最重要的技能不是写代码，而是【提问】。问对了问题，答案自然就出来了。' },
             ],
         },
         {
-            id: 'l4-arena', bg: 'arena',
+            id: 'l4-builder', bg: 'promptBuilder', game: 'builder',
             dialogue: [
-                { speaker: '小智', avatar: '🤖', text: '欢迎来到提示词竞技场！', action: 'initArena' },
-                { speaker: '小智', avatar: '🤖', text: '【达克效应】大白话：为什么越不懂的人越觉得自己懂？因为他们不知道自己不知道什么。一个从没出过村子的人会觉得自己的村子就是全世界。' },
-                { speaker: '系统', avatar: '⚔️', text: '【实战演练】下面有两个提示词。观察它们的区别，思考哪个能得到更好的结果。' },
-                { speaker: '小智', avatar: '🤖', text: '好提示词公式：【角色 + 背景 + 任务 + 格式 + 限制】。大白话：就像你去餐厅点菜，不能只说"给我来点好吃的"，你得说"我想要一碗不辣的、加蛋的、少油的番茄牛肉面"。越具体，结果越好。' },
-                { speaker: '小智', avatar: '🤖', text: '【元认知】大白话：就是"思考你是怎么思考的"。普通人直接问AI问题。高手先想：我应该怎么问，才能得到最好的答案？这就是元认知 —— 对自己思维方式的反思。' },
-                { speaker: '小智', avatar: '🤖', text: '记住：AI的天花板，就是你提问能力的天花板。', action: 'completeLesson' },
+                { speaker: '小智', avatar: '🤖', text: '好提示词公式：【角色 + 背景 + 任务 + 格式 + 限制】。' },
+                { speaker: '系统', avatar: '🧩', text: '【互动】点击选择你认为好提示词应该包含的要素，看看你能拿多少分！' },
+                { speaker: '小智', avatar: '🤖', text: '就像去餐厅点菜，不能只说\"给我来点好吃的\"，得说\"不辣的、加蛋的、少油的番茄牛肉面\"。越具体越好。' },
+            ],
+        },
+        {
+            id: 'l4-pk', bg: 'promptBuilder', game: 'pk',
+            dialogue: [
+                { speaker: '小智', avatar: '🤖', text: '理论学够了，来实战PK！看看你能不能分辨好坏提示词。' },
+                { speaker: '系统', avatar: '⚡', text: '【互动】每轮有两个提示词，选出更好的那个。考考你的眼力！' },
+                { speaker: '小智', avatar: '🤖', text: '记住：好提示词 = 具体 + 有角色 + 有格式 + 有限制。' },
+            ],
+        },
+        {
+            id: 'l4-meta', bg: 'promptBuilder', game: 'meta',
+            dialogue: [
+                { speaker: '小智', avatar: '🤖', text: '【元认知】就是\"思考你是怎么思考的\"。普通人直接问AI问题，高手先想：我应该怎么问？' },
+                { speaker: '系统', avatar: '🪞', text: '【互动】层层深入元认知的三个层次。看看你的思维有几层！' },
+                { speaker: '小智', avatar: '🤖', text: 'AI的天花板，就是你提问能力的天花板。', action: 'completeLesson' },
             ],
         },
     ],
@@ -166,18 +196,31 @@ const lesson5: LessonData = {
             id: 'l5-intro', bg: 'intro',
             dialogue: [
                 { speaker: '小智', avatar: '🤖', text: '今天的课有点扎心。我们来聊聊：为什么大多数人注定平庸？' },
-                { speaker: '小智', avatar: '🤖', text: '注意，我说的不是"笨"，而是"平庸"。平庸的意思是：做着和所有人一样的事情，得到和所有人一样的结果。', action: 'triggerInteraction' },
+                { speaker: '小智', avatar: '🤖', text: '注意，我说的不是\"笨\"，而是\"平庸\"。平庸 = 做着和所有人一样的事，得到一样的结果。' },
             ],
         },
         {
-            id: 'l5-dunning', bg: 'dark',
+            id: 'l5-dunning', bg: 'dunningKruger', game: 'dunning',
             dialogue: [
-                { speaker: '小智', avatar: '🤖', text: '【达克效应完整版】', action: 'initDunning' },
-                { speaker: '小智', avatar: '🤖', text: '第一阶段："愚昧之巅"。大白话：刚学会一点皮毛就觉得自己是专家了。比如看了两个做饭视频就觉得自己能开餐厅。' },
-                { speaker: '小智', avatar: '🤖', text: '第二阶段："绝望之谷"。大白话：真正深入学习后发现自己什么都不会，信心跌到谷底。大多数人在这里放弃了。' },
-                { speaker: '小智', avatar: '🤖', text: '第三阶段："开悟之坡"。大白话：坚持过来的人开始真正理解，慢慢建立起真实的能力。自信也慢慢回来了，但这次是有底气的自信。' },
-                { speaker: '小智', avatar: '🤖', text: '【幸存者偏差】大白话：你只看到成功的人，看不到失败的人。10000个创业者里9999个失败了，但新闻只报道那1个成功的，让你以为创业很容易。' },
-                { speaker: '小智', avatar: '🤖', text: '【反共识思维】大白话：当所有人都往一个方向跑的时候，你要停下来想想：他们真的对吗？别人都在刷短视频，你不刷，这本身就是一种超级竞争力。', action: 'completeLesson' },
+                { speaker: '小智', avatar: '🤖', text: '【达克效应】为什么越不懂的人越觉得自己懂？因为他们不知道自己不知道什么。' },
+                { speaker: '系统', avatar: '🏔️', text: '【互动】点击按钮经历达克效应的四个阶段。大多数人在\"绝望之谷\"就放弃了。' },
+                { speaker: '小智', avatar: '🤖', text: '坚持过来的人才能达到\"开悟之坡\"——建立真实的、有底气的自信。' },
+            ],
+        },
+        {
+            id: 'l5-survivor', bg: 'dunningKruger', game: 'survivor',
+            dialogue: [
+                { speaker: '小智', avatar: '🤖', text: '【幸存者偏差】你只看到成功的人，看不到失败的人。' },
+                { speaker: '系统', avatar: '🔦', text: '【互动】切换聚光灯，看看新闻背后的完整真相。1个成功者的背后是9999个失败者。' },
+                { speaker: '小智', avatar: '🤖', text: '别被成功学骗了。了解失败者的故事，才能真正学到东西。' },
+            ],
+        },
+        {
+            id: 'l5-anti', bg: 'dunningKruger', game: 'anti',
+            dialogue: [
+                { speaker: '小智', avatar: '🤖', text: '【反共识思维】当所有人都往一个方向跑，你要停下来想想：他们真的对吗？' },
+                { speaker: '系统', avatar: '🤔', text: '【互动】回答几个反共识的选择题，看看你有没有独立思考的勇气。' },
+                { speaker: '小智', avatar: '🤖', text: '别人都在刷短视频而你不刷——这本身就是超级竞争力。', action: 'completeLesson' },
             ],
         },
     ],
@@ -191,18 +234,32 @@ const lesson6: LessonData = {
         {
             id: 'l6-intro', bg: 'intro',
             dialogue: [
-                { speaker: '小智', avatar: '🤖', text: '在AI时代，最危险的不是不知道，而是被错误的信息欺骗还不自知。今天我们来打造你的信息免疫系统。' },
-                { speaker: '小智', avatar: '🤖', text: '大白话：就像身体有免疫系统来抵抗病毒，你的大脑也需要一个"信息免疫系统"来抵抗假信息、烂信息和有毒信息。', action: 'triggerInteraction' },
+                { speaker: '小智', avatar: '🤖', text: '在AI时代，最危险的不是不知道，而是被错误信息欺骗还不自知。' },
+                { speaker: '小智', avatar: '🤖', text: '就像身体有免疫系统抵抗病毒，你的大脑也需要一个\"信息免疫系统\"来抵抗假信息。' },
             ],
         },
         {
-            id: 'l6-lab', bg: 'lab',
+            id: 'l6-detector', bg: 'fakeNews', game: 'detector',
             dialogue: [
-                { speaker: '小智', avatar: '🤖', text: '【确认偏误】大白话：你相信什么，就只会看到支持你观点的信息。如果你觉得猫比狗好，你的推荐算法就会不断给你推"猫比狗好"的内容，让你越来越坚定。但这不代表你是对的。', action: 'initLab' },
-                { speaker: '小智', avatar: '🤖', text: '【信息茧房】大白话：算法把你包在了一个"信息气泡"里。你以为你看到了整个世界，其实你只看到了算法想让你看到的那个小角落。' },
-                { speaker: '系统', avatar: '🔬', text: '【实验室】现在看这段文字。它看起来很有道理对吧？试着找出里面的逻辑漏洞。' },
-                { speaker: '小智', avatar: '🤖', text: '【批判性三问法】看到任何信息，先问三个问题：①谁说的？（来源可靠吗？）②证据是什么？（有数据支持吗？）③他想让我做什么？（背后有什么目的？）' },
-                { speaker: '小智', avatar: '🤖', text: '【AI幻觉】大白话：AI有时候会一本正经地胡说八道。它说的话听起来像真的，但可能完全是编的。所以永远不要100%相信AI的输出，要学会验证。', action: 'completeLesson' },
+                { speaker: '小智', avatar: '🤖', text: '【确认偏误】你相信什么，就只看到支持你观点的信息。' },
+                { speaker: '系统', avatar: '🔍', text: '【互动】看这些新闻，判断哪些是真的、哪些是假的。小心！假新闻看起来很真。' },
+                { speaker: '小智', avatar: '🤖', text: '你不是在「学会辨别」——你是在「训练你的信息免疫力」。' },
+            ],
+        },
+        {
+            id: 'l6-bubble', bg: 'fakeNews', game: 'bubble',
+            dialogue: [
+                { speaker: '小智', avatar: '🤖', text: '【信息茧房】算法把你包在一个\"信息气泡\"里。你以为看到了全世界，其实只看到了算法选给你的小角落。' },
+                { speaker: '系统', avatar: '🧪', text: '【互动】打破信息茧房的每一层壳，接触新的领域和观点。' },
+                { speaker: '小智', avatar: '🤖', text: '多接触不同领域的信息，才能避免偏见。你看到的不是全世界。' },
+            ],
+        },
+        {
+            id: 'l6-critical', bg: 'fakeNews', game: 'critical',
+            dialogue: [
+                { speaker: '小智', avatar: '🤖', text: '【批判性三问法】看到任何信息先问：①谁说的？②证据是什么？③他想让我做什么？' },
+                { speaker: '系统', avatar: '🧠', text: '【互动】用三问法分析一条看似有道理的信息。揭晓每一层的真相。' },
+                { speaker: '小智', avatar: '🤖', text: '【AI幻觉】AI有时会一本正经地胡说八道。永远不要100%相信AI的输出，要学会验证。', action: 'completeLesson' },
             ],
         },
     ],
@@ -216,19 +273,32 @@ const lesson7: LessonData = {
         {
             id: 'l7-intro', bg: 'intro',
             dialogue: [
-                { speaker: '小智', avatar: '🤖', text: '恭喜你进入第三模块——价值创造。从现在开始，你不再是学生，你是一个创造者。' },
-                { speaker: '小智', avatar: '🤖', text: '今天学一个所有程序员、设计师、CEO都在用的思维方式：【模块化思维】。' },
-                { speaker: '小智', avatar: '🤖', text: '大白话：怎么吃掉一头大象？答案是一口一口吃。把一个大到吓人的问题，拆成一个个小到不怕的子问题。', action: 'triggerInteraction' },
+                { speaker: '小智', avatar: '🤖', text: '恭喜你进入第三模块——价值创造。从现在开始，你是一个创造者。' },
+                { speaker: '小智', avatar: '🤖', text: '今天学一个所有程序员、设计师、CEO都在用的方法：【模块化思维】。怎么吃掉一头大象？一口一口吃。' },
             ],
         },
         {
-            id: 'l7-forge', bg: 'forge',
+            id: 'l7-splitter', bg: 'elephant', game: 'splitter',
             dialogue: [
-                { speaker: '小智', avatar: '🤖', text: '看这个例子：老师让你做一个"班级新闻网站"，你觉得好难，不知道从哪开始。', action: 'initForge' },
-                { speaker: '系统', avatar: '🧩', text: '拆解过程：班级新闻网站 → ①新闻列表页面 ②单篇新闻页面 ③发布新闻功能 ④评论功能。每个子问题再拆：新闻列表 → 标题 + 图片 + 日期 + 作者。' },
-                { speaker: '小智', avatar: '🤖', text: '大白话就是【乐高积木】思维。你不是在造一个城堡，你是在拼一块一块的积木。每块积木都很小，都能单独完成。拼在一起就是个城堡。' },
-                { speaker: '小智', avatar: '🤖', text: '【MECE原则】大白话：拆的时候要做到"不重叠、不遗漏"。就像切披萨，每一刀都要切到底，而且不能切重复的地方。' },
-                { speaker: '小智', avatar: '🤖', text: '现在你知道了为什么程序员写代码要分成一个个"函数"和"组件"了吧？因为他们在用模块化思维拆解大象。', action: 'completeLesson' },
+                { speaker: '小智', avatar: '🤖', text: '看这个例子：老师让你做\"班级新闻网站\"。好大的象啊，不知道从哪开始。' },
+                { speaker: '系统', avatar: '🐘', text: '【互动】点击拆解按钮，一层一层把大象变成小积木。' },
+                { speaker: '小智', avatar: '🤖', text: '一头大象被拆成了8块小积木！每块都很简单。这就是模块化思维的威力。' },
+            ],
+        },
+        {
+            id: 'l7-lego', bg: 'elephant', game: 'lego',
+            dialogue: [
+                { speaker: '小智', avatar: '🤖', text: '大白话就是【乐高积木】思维。你不是在造城堡，你是在拼积木。每块积木都能单独完成。' },
+                { speaker: '系统', avatar: '🧩', text: '【互动】按顺序点击积木，把它们拼装成一个完整的网站。' },
+                { speaker: '小智', avatar: '🤖', text: '看！独立完成每块积木，组合起来就是一个完整产品。' },
+            ],
+        },
+        {
+            id: 'l7-mece', bg: 'elephant', game: 'mece',
+            dialogue: [
+                { speaker: '小智', avatar: '🤖', text: '【MECE原则】拆的时候要做到\"不重叠、不遗漏\"。就像切披萨，每刀切到底，不能切重复。' },
+                { speaker: '系统', avatar: '🍕', text: '【互动】用MECE原则把学校里的人分类。每切一刀，看看分出了什么。' },
+                { speaker: '小智', avatar: '🤖', text: '程序员写代码为什么分成函数和组件？因为他们在用模块化思维拆解大象。', action: 'completeLesson' },
             ],
         },
     ],
@@ -243,17 +313,31 @@ const lesson8: LessonData = {
             id: 'l8-intro', bg: 'intro',
             dialogue: [
                 { speaker: '小智', avatar: '🤖', text: '今天学习马斯克最推崇的思维方式：【第一性原理】。' },
-                { speaker: '小智', avatar: '🤖', text: '大白话：别人怎么做不重要，重要的是回到事情最根本的道理。就像剥洋葱一样，一层一层剥，直到找到最核心的那个东西。', action: 'triggerInteraction' },
+                { speaker: '小智', avatar: '🤖', text: '大白话：别人怎么做不重要，重要的是回到事情最根本的道理。就像剥洋葱，一层一层剥到最核心的东西。' },
             ],
         },
         {
-            id: 'l8-example', bg: 'lab',
+            id: 'l8-onion', bg: 'onion', game: 'onion',
             dialogue: [
-                { speaker: '小智', avatar: '🤖', text: '经典案例：2005年，所有人都觉得电池很贵，不可能做便宜的电动车。', action: 'initLab' },
-                { speaker: '小智', avatar: '🤖', text: '类比思维（大多数人）："电池一直很贵，所以以后也会很贵。电动车没戏。"' },
-                { speaker: '小智', avatar: '🤖', text: '第一性原理（马斯克）："电池是由什么组成的？镍、钴、锂、碳等原材料。这些原材料的价格是多少？在市场上买只要电池价格的1/10。那问题出在哪里？在制造方式上。"' },
-                { speaker: '小智', avatar: '🤖', text: '大白话：所有人都说"不可能"的时候，不要跟着说"不可能"。回到最基本的事实，重新想一遍。也许只是方法不对，不是方向不对。' },
-                { speaker: '小智', avatar: '🤖', text: '【思维实验】如果你要帮学校食堂解决"排队太长"的问题，用第一性原理会怎么想？', action: 'completeLesson' },
+                { speaker: '小智', avatar: '🤖', text: '经典案例：2005年所有人都觉得电池很贵。马斯克问了一个不同的问题...' },
+                { speaker: '系统', avatar: '🧅', text: '【互动】一层一层剥开洋葱，从「电池太贵」到找到最核心的真相。' },
+                { speaker: '小智', avatar: '🤖', text: '所有人都说\"不可能\"的时候，不要跟着说。回到最基本的事实，重新想。' },
+            ],
+        },
+        {
+            id: 'l8-analogy', bg: 'onion', game: 'analogy',
+            dialogue: [
+                { speaker: '小智', avatar: '🤖', text: '类比思维vs第一性原理——两种截然不同的思考方式。你能分辨吗？' },
+                { speaker: '系统', avatar: '⚖️', text: '【互动】判断每句话是「类比思维」还是「第一性原理」。' },
+                { speaker: '小智', avatar: '🤖', text: '类比思维跟着别人走，第一性原理从零开始想。遇到难题时，试试第一性原理！' },
+            ],
+        },
+        {
+            id: 'l8-whys', bg: 'onion', game: 'whys',
+            dialogue: [
+                { speaker: '小智', avatar: '🤖', text: '【思维实验】学校食堂排队太长怎么办？用第一性原理来想。' },
+                { speaker: '系统', avatar: '❓', text: '【互动】连续追问\"为什么\"，找到问题的根源。答案可能比你想的简单得多。' },
+                { speaker: '小智', avatar: '🤖', text: '不需要花钱改造食堂，只需要错峰用餐——这就是第一性原理的力量。', action: 'completeLesson' },
             ],
         },
     ],
@@ -267,18 +351,32 @@ const lesson9: LessonData = {
         {
             id: 'l9-intro', bg: 'intro',
             dialogue: [
-                { speaker: '小智', avatar: '🤖', text: '之前的课你学会了思维方式。现在，让我们用这些思维方式来做一件真正的事情：打造你的第一个AI员工。' },
-                { speaker: '小智', avatar: '🤖', text: '大白话：AI员工就是一个你训练出来的、能自动帮你完成某个任务的AI程序。它不会累，不会请假，7x24小时工作。', action: 'triggerInteraction' },
+                { speaker: '小智', avatar: '🤖', text: '之前学了思维方式，现在来做一件真正的事：打造你的第一个AI员工。' },
+                { speaker: '小智', avatar: '🤖', text: 'AI员工就是一个你训练出来的、能自动帮你完成任务的AI程序。不会累，不请假，7x24工作。' },
             ],
         },
         {
-            id: 'l9-build', bg: 'forge',
+            id: 'l9-pain', bg: 'agentBuilder', game: 'pain',
             dialogue: [
-                { speaker: '小智', avatar: '🤖', text: '步骤一：找到一个"痛点"。大白话：你或者你身边的人，有什么事情觉得很烦、很重复、很浪费时间？比如每天整理课堂笔记？比如给作文找错别字？', action: 'initForge' },
-                { speaker: '小智', avatar: '🤖', text: '步骤二：设计"系统提示词"。这是AI员工的"工作手册"。你需要告诉它：你是谁、你的任务是什么、你要遵守什么规则、你的输出格式是什么。' },
-                { speaker: '小智', avatar: '🤖', text: '步骤三：测试和迭代。大白话：做出来先试用，发现问题就改，改完再试，反复循环。没有人一次就能做到完美，连马斯克的火箭都炸了好多次。' },
-                { speaker: '小智', avatar: '🤖', text: '【MVP思维】大白话：先做一个"最小可用版本"（Minimum Viable Product）。别想着一上来就做得完美，先做一个能用的，然后再慢慢改进。' },
-                { speaker: '小智', avatar: '🤖', text: '你的第一个AI员工不需要很厉害。它只需要能帮你解决一个小问题。但从零到一的这一步，比从一到一百重要一万倍。', action: 'completeLesson' },
+                { speaker: '小智', avatar: '🤖', text: '步骤一：找到一个「痛点」。你或身边的人，有什么事情觉得很烦、很重复、很浪费时间？' },
+                { speaker: '系统', avatar: '🎯', text: '【互动】选一个你最想解决的痛点，看看AI怎么帮你。' },
+                { speaker: '小智', avatar: '🤖', text: '痛点越大，你的AI员工越有价值。先找到那个让人头疼的问题！' },
+            ],
+        },
+        {
+            id: 'l9-assembler', bg: 'agentBuilder', game: 'assembler',
+            dialogue: [
+                { speaker: '小智', avatar: '🤖', text: '步骤二：设计\"系统提示词\"——这是AI员工的\"工作手册\"。' },
+                { speaker: '系统', avatar: '🤖', text: '【互动】点击零件，一步步组装你的AI员工。给它角色、任务、格式和规则。' },
+                { speaker: '小智', avatar: '🤖', text: '这就是一个完整的系统提示词！你已经会\"编程\"AI了。' },
+            ],
+        },
+        {
+            id: 'l9-mvp', bg: 'agentBuilder', game: 'mvp',
+            dialogue: [
+                { speaker: '小智', avatar: '🤖', text: '步骤三：测试和迭代。先做最小可用版本(MVP)，然后慢慢改进。连马斯克的火箭都炸了好多次。' },
+                { speaker: '系统', avatar: '🔄', text: '【互动】模拟产品迭代过程，看它如何从粗糙到完美。' },
+                { speaker: '小智', avatar: '🤖', text: '你的第一个AI员工不需要很厉害。但从零到一的这一步，比从一到一百重要一万倍。', action: 'completeLesson' },
             ],
         },
     ],
@@ -292,19 +390,32 @@ const lesson10: LessonData = {
         {
             id: 'l10-intro', bg: 'intro',
             dialogue: [
-                { speaker: '小智', avatar: '🤖', text: '这是最后一课。也是最重要的一课。因为今天你要做的事情，99%的成年人都没做过：把你的作品展示给世界看。' },
-                { speaker: '小智', avatar: '🤖', text: '大白话：做出东西只是成功的一半。另一半是让别人知道你做了什么、为什么做、它能帮谁解决什么问题。这叫【价值传达】。', action: 'triggerInteraction' },
+                { speaker: '小智', avatar: '🤖', text: '最后一课，也是最重要的一课。今天你要做99%成年人都没做过的事：把你的作品展示给世界看。' },
+                { speaker: '小智', avatar: '🤖', text: '做出东西只是成功的一半。另一半是让别人知道你做了什么、为什么做、它能帮谁。这叫【价值传达】。' },
             ],
         },
         {
-            id: 'l10-summit', bg: 'summit',
+            id: 'l10-story', bg: 'demoDay', game: 'story',
             dialogue: [
-                { speaker: '小智', avatar: '🤖', text: '产品发布会的三个要素：', action: 'initSummit' },
-                { speaker: '小智', avatar: '🤖', text: '第一：【痛点故事】。大白话：不要上来就说"我做了个AI工具"，而是说"我发现我妈妈每天花2小时整理购物清单，很辛苦。所以我做了一个AI助手来帮她。"' },
-                { speaker: '小智', avatar: '🤖', text: '第二：【现场演示】。大白话：不要只说你的东西有多好，直接打开让大家看。活的演示比100页PPT有说服力。' },
-                { speaker: '小智', avatar: '🤖', text: '第三：【用户反馈】。大白话：让真正用过你产品的人说话。"我妈妈用了我的AI助手后，每天省下1小时。"这句话比你自己说100句都管用。' },
-                { speaker: '小智', avatar: '🤖', text: '【成长型思维】大白话：这不是终点，这只是起点。你今天做的第一个产品可能很粗糙，但这不重要。重要的是你已经从消费者变成了生产者。你已经完成了最困难的那一步。' },
-                { speaker: '小智', avatar: '🤖', text: '恭喜你完成了全部10节课。你现在拥有了同龄人中最稀缺的东西：时间意识、生产者思维和AI杠杆能力。去创造吧，未来的生产者。🚀', action: 'completeCourse' },
+                { speaker: '小智', avatar: '🤖', text: '第一：【痛点故事】。不要说\"我做了个AI工具\"，而是说\"我妈妈每天花2小时整理购物清单，所以我做了个AI助手\"。' },
+                { speaker: '系统', avatar: '📖', text: '【互动】选出能打动人的故事开场白。感染力差距有多大？看看就知道。' },
+                { speaker: '小智', avatar: '🤖', text: '好故事的秘诀：先讲痛点，再讲方案，最后讲效果。让听众先共情再理解。' },
+            ],
+        },
+        {
+            id: 'l10-demo', bg: 'demoDay', game: 'demo',
+            dialogue: [
+                { speaker: '小智', avatar: '🤖', text: '第二：【现场演示】。不要只说有多好，直接打开让大家看。活的演示比100页PPT有说服力。' },
+                { speaker: '系统', avatar: '🔢', text: '【互动】把产品发布会的流程排成正确的顺序。好的顺序决定好的表达。' },
+                { speaker: '小智', avatar: '🤖', text: '第三：【用户反馈】。\"我妈用了AI助手后每天省下1小时\"——比你自己说100句都管用。' },
+            ],
+        },
+        {
+            id: 'l10-slogan', bg: 'demoDay', game: 'slogan',
+            dialogue: [
+                { speaker: '小智', avatar: '🤖', text: '最后一步：给你的产品想一句响亮的口号。好Slogan胜过千言万语。' },
+                { speaker: '系统', avatar: '✨', text: '【互动】选择模板，输入你的产品关键词，生成属于你的Slogan！' },
+                { speaker: '小智', avatar: '🤖', text: '【成长型思维】这不是终点，这只是起点。你已经从消费者变成了生产者。去创造吧，未来的生产者！🚀', action: 'completeCourse' },
             ],
         },
     ],
