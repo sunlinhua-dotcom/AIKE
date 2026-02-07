@@ -7,9 +7,10 @@ import { DialogueLine } from '@/store/gameStore';
 interface DialogueBoxProps {
     line: DialogueLine | null;
     onNext: () => void;
+    isLastDialogue?: boolean;
 }
 
-export default function DialogueBox({ line, onNext }: DialogueBoxProps) {
+export default function DialogueBox({ line, onNext, isLastDialogue = false }: DialogueBoxProps) {
     const [displayedText, setDisplayedText] = useState('');
     const [isTyping, setIsTyping] = useState(false);
 
@@ -96,12 +97,19 @@ export default function DialogueBox({ line, onNext }: DialogueBoxProps) {
                     <motion.div
                         animate={{ y: [0, -5, 0] }}
                         transition={{ repeat: Infinity, duration: 1 }}
-                        className="self-end"
+                        className="self-end flex-shrink-0"
                     >
-                        <div className="bg-pink-500 text-white px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg shadow-pink-500/30">
-                            <span>继续</span>
-                            <span>▶</span>
-                        </div>
+                        {isLastDialogue ? (
+                            <div className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg shadow-cyan-500/30">
+                                <span>下一课</span>
+                                <span>→</span>
+                            </div>
+                        ) : (
+                            <div className="bg-pink-500 text-white px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg shadow-pink-500/30">
+                                <span>继续</span>
+                                <span>▶</span>
+                            </div>
+                        )}
                     </motion.div>
                 )}
             </div>

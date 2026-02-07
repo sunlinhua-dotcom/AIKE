@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -35,6 +36,7 @@ function getDialogueImagePath(lessonId: number, dialogueIndex: number): string {
 }
 
 export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
+    const router = useRouter();
     const { nextStep, setLesson, addProducerScore, completeLesson, reset } = useGameStore();
     const [sceneIndex, setSceneIndex] = useState(0);
     const [localDialogueIndex, setLocalDialogueIndex] = useState(0);
@@ -124,8 +126,18 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
             setLocalDialogueIndex(0);
             nextStep();
             playSfx('whoosh');
+        } else {
+            // 已是最后一句对话，跳转下一课
+            const nextLessonId = lessonId + 1;
+            const nextLesson = allLessons.find(l => l.id === nextLessonId);
+            if (nextLesson) {
+                router.push(`/lesson/${nextLessonId}`);
+            } else {
+                // 已是最后一课，返回首页
+                router.push('/');
+            }
         }
-    }, [currentScene, localDialogueIndex, sceneIndex, scenes, nextStep, addProducerScore, completeLesson, lessonId, playSfx, globalDialogueIndex, activeLayer]);
+    }, [currentScene, localDialogueIndex, sceneIndex, scenes, nextStep, addProducerScore, completeLesson, lessonId, playSfx, globalDialogueIndex, activeLayer, router]);
 
     // 渲染互动场景
     const renderInteraction = useCallback(() => {
@@ -261,7 +273,13 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
             <MuteButton isMuted={isMuted} onToggle={toggleMute} />
 
             {/* 对话框 */}
-            {!showInteraction && <DialogueBox line={currentLine} onNext={handleNext} />}
+            {!showInteraction && (
+                <DialogueBox
+                    line={currentLine}
+                    onNext={handleNext}
+                    isLastDialogue={sceneIndex === scenes.length - 1 && localDialogueIndex === (currentScene?.dialogue.length ?? 1) - 1}
+                />
+            )}
         </div>
     );
 }
