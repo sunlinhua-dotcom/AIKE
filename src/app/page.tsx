@@ -1,11 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { allLessons } from '@/data/lessons';
 import { useGameStore } from '@/store/gameStore';
 
 export default function HomePage() {
+  const router = useRouter();
   const { lessonsCompleted } = useGameStore();
 
   return (
@@ -48,31 +49,30 @@ export default function HomePage() {
                 .map((lesson, i) => {
                   const isCompleted = lessonsCompleted.includes(lesson.id);
                   return (
-                    <Link key={lesson.id} href={`/lesson/${lesson.id}`}>
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: mi * 0.1 + i * 0.05 }}
-                        whileHover={{ scale: 1.02, y: -2 }}
-                        className={`p-5 rounded-xl border cursor-pointer transition-all
-                          ${isCompleted
-                            ? 'bg-green-500/5 border-green-500/20'
-                            : 'bg-white/[0.03] border-white/[0.05] hover:border-pink-500/30 hover:bg-white/[0.05]'
-                          }
-                        `}
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="text-3xl">{lesson.icon}</span>
-                          <div>
-                            <div className="font-bold text-white">
-                              L{lesson.id}: {lesson.title}
-                              {isCompleted && <span className="ml-2 text-green-400 text-xs">✓ 已完成</span>}
-                            </div>
-                            <div className="text-gray-500 text-sm">{lesson.subtitle}</div>
+                    <div
+                      key={lesson.id}
+                      onClick={() => router.push(`/lesson/${lesson.id}`)}
+                      role="button"
+                      tabIndex={0}
+                      style={{ touchAction: 'manipulation' }}
+                      className={`p-5 rounded-xl border cursor-pointer transition-all active:scale-95
+                        ${isCompleted
+                          ? 'bg-green-500/5 border-green-500/20'
+                          : 'bg-white/[0.03] border-white/[0.05] hover:border-pink-500/30 hover:bg-white/[0.05]'
+                        }
+                      `}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="text-3xl">{lesson.icon}</span>
+                        <div>
+                          <div className="font-bold text-white">
+                            L{lesson.id}: {lesson.title}
+                            {isCompleted && <span className="ml-2 text-green-400 text-xs">✓ 已完成</span>}
                           </div>
+                          <div className="text-gray-500 text-sm">{lesson.subtitle}</div>
                         </div>
-                      </motion.div>
-                    </Link>
+                      </div>
+                    </div>
                   );
                 })}
             </div>
