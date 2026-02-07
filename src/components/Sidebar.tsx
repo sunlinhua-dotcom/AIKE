@@ -43,10 +43,9 @@ export default function Sidebar() {
                     const isActive = lesson.id === currentLesson;
                     const isCompleted = lessonsCompleted.includes(lesson.id);
                     return (
-                        <Link key={lesson.id} href={`/lesson/${lesson.id}`}>
-                            <motion.div
-                                whileHover={{ x: 4 }}
-                                className={`px-3 py-2.5 rounded-lg text-sm cursor-pointer transition-all flex items-center gap-2
+                        <Link key={lesson.id} href={`/lesson/${lesson.id}`} onClick={() => setIsOpen(false)}>
+                            <div
+                                className={`px-3 py-2.5 rounded-lg text-sm cursor-pointer transition-all flex items-center gap-2 active:scale-95
                   ${isActive
                                         ? 'bg-pink-500/20 border border-pink-500/30 text-white'
                                         : 'text-gray-400 hover:text-white hover:bg-white/5'
@@ -58,7 +57,7 @@ export default function Sidebar() {
                                     <div className="font-medium truncate">L{lesson.id}: {lesson.title}</div>
                                 </div>
                                 {isCompleted && <span className="text-green-400 text-xs">✓</span>}
-                            </motion.div>
+                            </div>
                         </Link>
                     );
                 })}
@@ -122,7 +121,7 @@ export default function Sidebar() {
                     /* 移动端：抽屉式 */
                     fixed inset-y-0 left-0 w-[280px] z-[80]
                     transition-transform duration-300 ease-in-out
-                    ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+                    ${isOpen ? 'translate-x-0 pointer-events-auto' : '-translate-x-full pointer-events-none md:pointer-events-auto'}
                     md:transition-none
                 `}
             >
