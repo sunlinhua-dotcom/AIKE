@@ -52,7 +52,7 @@ function LeverGame({ onComplete }: { onComplete: () => void }) {
             </div>
 
             {leverPower > 70 && (
-                <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} onClick={onComplete}
+                <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} onClick={() => setTimeout(onComplete, 2000)}
                     className="w-full mt-3 py-2 bg-green-500/20 border border-green-500/30 rounded-lg text-green-400 font-bold">
                     我理解了！继续 →
                 </motion.button>
@@ -121,7 +121,7 @@ function PromptBattleGame({ onComplete }: { onComplete: () => void }) {
             </div>
 
             {viewedAll && (
-                <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} onClick={onComplete}
+                <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} onClick={() => setTimeout(onComplete, 2000)}
                     className="w-full mt-3 py-2 bg-green-500/20 border border-green-500/30 rounded-lg text-green-400 font-bold">
                     全部看完！继续 →
                 </motion.button>
@@ -183,7 +183,7 @@ function CostTimelineGame({ onComplete }: { onComplete: () => void }) {
             </div>
 
             {clickedAll.size >= 4 && (
-                <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} onClick={onComplete}
+                <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} onClick={() => setTimeout(onComplete, 2000)}
                     className="w-full mt-4 py-2 bg-green-500/20 border border-green-500/30 rounded-lg text-green-400 font-bold">
                     震撼！继续 →
                 </motion.button>

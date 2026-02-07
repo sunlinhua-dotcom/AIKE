@@ -78,7 +78,7 @@ const lesson2: LessonData = {
             dialogue: [
                 { speaker: '小智', avatar: '🤖', text: '上一课你学到了时间的真相。今天我们要搞清楚一个更深层的问题：为什么有些人越来越富，有些人越来越穷？' },
                 { speaker: '小智', avatar: '🤖', text: '答案就藏在两个字里：【消费者】和【生产者】。' },
-                { speaker: '小智', avatar: '🤖', text: '大白话：世界上只有两种人。一种人花钱买别人做的东西（消费者），一种人做东西卖给别人（生产者）。打游戏的是消费者，做游戏的是生产者。' },
+                { speaker: '小智', avatar: '🤖', text: '大白话：世界上只有两种人。一种人花钱买别人做的东西（消费者），一种人做东西卖给别人（生产者）。打游戏的是消费者，做游戏的是生产者。', action: 'triggerInteraction' },
             ],
         },
         {
@@ -114,7 +114,7 @@ const lesson3: LessonData = {
             dialogue: [
                 { speaker: '小智', avatar: '🤖', text: '很多人以为AI是万能的。今天我要告诉你一个真相：AI不是魔法，AI是杠杆。' },
                 { speaker: '小智', avatar: '🤖', text: '大白话：杠杆就是那个能让你用小力气撬动大石头的棍子。阿基米德说"给我一个支点，我能撬动地球"。AI就是你的数字杠杆。' },
-                { speaker: '小智', avatar: '🤖', text: '但是！杠杆需要一个支点。你的支点是什么？是你的【认知】和【判断力】。如果你自己不懂，AI再强也帮不了你。垃圾进去，垃圾出来（Garbage In, Garbage Out）。' },
+                { speaker: '小智', avatar: '🤖', text: '但是！杠杆需要一个支点。你的支点是什么？是你的【认知】和【判断力】。如果你自己不懂，AI再强也帮不了你。垃圾进去，垃圾出来（Garbage In, Garbage Out）。', action: 'triggerInteraction' },
             ],
         },
         {
@@ -140,7 +140,7 @@ const lesson4: LessonData = {
             id: 'l4-intro', bg: 'intro',
             dialogue: [
                 { speaker: '小智', avatar: '🤖', text: '上一课说了AI是杠杆。今天我们来锻造这根杠杆的关键部件：提问能力。' },
-                { speaker: '小智', avatar: '🤖', text: '你知道吗？在Google工作的人，最重要的技能不是写代码，而是【提问】。因为你问对了问题，答案自然就出来了。' },
+                { speaker: '小智', avatar: '🤖', text: '你知道吗？在Google工作的人，最重要的技能不是写代码，而是【提问】。因为你问对了问题，答案自然就出来了。', action: 'triggerInteraction' },
             ],
         },
         {
@@ -166,7 +166,7 @@ const lesson5: LessonData = {
             id: 'l5-intro', bg: 'intro',
             dialogue: [
                 { speaker: '小智', avatar: '🤖', text: '今天的课有点扎心。我们来聊聊：为什么大多数人注定平庸？' },
-                { speaker: '小智', avatar: '🤖', text: '注意，我说的不是"笨"，而是"平庸"。平庸的意思是：做着和所有人一样的事情，得到和所有人一样的结果。' },
+                { speaker: '小智', avatar: '🤖', text: '注意，我说的不是"笨"，而是"平庸"。平庸的意思是：做着和所有人一样的事情，得到和所有人一样的结果。', action: 'triggerInteraction' },
             ],
         },
         {
@@ -192,7 +192,7 @@ const lesson6: LessonData = {
             id: 'l6-intro', bg: 'intro',
             dialogue: [
                 { speaker: '小智', avatar: '🤖', text: '在AI时代，最危险的不是不知道，而是被错误的信息欺骗还不自知。今天我们来打造你的信息免疫系统。' },
-                { speaker: '小智', avatar: '🤖', text: '大白话：就像身体有免疫系统来抵抗病毒，你的大脑也需要一个"信息免疫系统"来抵抗假信息、烂信息和有毒信息。' },
+                { speaker: '小智', avatar: '🤖', text: '大白话：就像身体有免疫系统来抵抗病毒，你的大脑也需要一个"信息免疫系统"来抵抗假信息、烂信息和有毒信息。', action: 'triggerInteraction' },
             ],
         },
         {
@@ -218,7 +218,7 @@ const lesson7: LessonData = {
             dialogue: [
                 { speaker: '小智', avatar: '🤖', text: '恭喜你进入第三模块——价值创造。从现在开始，你不再是学生，你是一个创造者。' },
                 { speaker: '小智', avatar: '🤖', text: '今天学一个所有程序员、设计师、CEO都在用的思维方式：【模块化思维】。' },
-                { speaker: '小智', avatar: '🤖', text: '大白话：怎么吃掉一头大象？答案是一口一口吃。把一个大到吓人的问题，拆成一个个小到不怕的子问题。' },
+                { speaker: '小智', avatar: '🤖', text: '大白话：怎么吃掉一头大象？答案是一口一口吃。把一个大到吓人的问题，拆成一个个小到不怕的子问题。', action: 'triggerInteraction' },
             ],
         },
         {
@@ -243,7 +243,7 @@ const lesson8: LessonData = {
             id: 'l8-intro', bg: 'intro',
             dialogue: [
                 { speaker: '小智', avatar: '🤖', text: '今天学习马斯克最推崇的思维方式：【第一性原理】。' },
-                { speaker: '小智', avatar: '🤖', text: '大白话：别人怎么做不重要，重要的是回到事情最根本的道理。就像剥洋葱一样，一层一层剥，直到找到最核心的那个东西。' },
+                { speaker: '小智', avatar: '🤖', text: '大白话：别人怎么做不重要，重要的是回到事情最根本的道理。就像剥洋葱一样，一层一层剥，直到找到最核心的那个东西。', action: 'triggerInteraction' },
             ],
         },
         {
@@ -268,7 +268,7 @@ const lesson9: LessonData = {
             id: 'l9-intro', bg: 'intro',
             dialogue: [
                 { speaker: '小智', avatar: '🤖', text: '之前的课你学会了思维方式。现在，让我们用这些思维方式来做一件真正的事情：打造你的第一个AI员工。' },
-                { speaker: '小智', avatar: '🤖', text: '大白话：AI员工就是一个你训练出来的、能自动帮你完成某个任务的AI程序。它不会累，不会请假，7x24小时工作。' },
+                { speaker: '小智', avatar: '🤖', text: '大白话：AI员工就是一个你训练出来的、能自动帮你完成某个任务的AI程序。它不会累，不会请假，7x24小时工作。', action: 'triggerInteraction' },
             ],
         },
         {
@@ -293,7 +293,7 @@ const lesson10: LessonData = {
             id: 'l10-intro', bg: 'intro',
             dialogue: [
                 { speaker: '小智', avatar: '🤖', text: '这是最后一课。也是最重要的一课。因为今天你要做的事情，99%的成年人都没做过：把你的作品展示给世界看。' },
-                { speaker: '小智', avatar: '🤖', text: '大白话：做出东西只是成功的一半。另一半是让别人知道你做了什么、为什么做、它能帮谁解决什么问题。这叫【价值传达】。' },
+                { speaker: '小智', avatar: '🤖', text: '大白话：做出东西只是成功的一半。另一半是让别人知道你做了什么、为什么做、它能帮谁解决什么问题。这叫【价值传达】。', action: 'triggerInteraction' },
             ],
         },
         {

@@ -85,6 +85,12 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
         if (line?.action === 'triggerInteraction') {
             setShowInteraction(true);
             playSfx('whoosh');
+            // 推进到下一个场景，返回时直接进入教学内容
+            if (sceneIndex < scenes.length - 1) {
+                setSceneIndex(prev => prev + 1);
+                setLocalDialogueIndex(0);
+                nextStep();
+            }
             return;
         }
 
@@ -220,7 +226,7 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
                             onClick={() => setShowInteraction(false)}
                             className="absolute top-2 right-2 md:top-4 md:right-16 z-50 bg-black/50 backdrop-blur-md rounded-full px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-gray-300 border border-white/10 hover:border-pink-500/30 transition-all"
                         >
-                            ← 返回对话
+                            ← 继续学习
                         </button>
                     </motion.div>
                 ) : (

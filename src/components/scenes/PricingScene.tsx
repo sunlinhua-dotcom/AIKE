@@ -180,7 +180,7 @@ function PassiveIncomeGame({ onComplete }: { onComplete: () => void }) {
             </div>
 
             {sales > 500 && (
-                <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} onClick={onComplete}
+                <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} onClick={() => setTimeout(onComplete, 2000)}
                     className="w-full mt-3 py-2 bg-green-500/20 border border-green-500/30 rounded-lg text-green-400 font-bold">
                     我理解了！继续 →
                 </motion.button>
