@@ -230,7 +230,7 @@ const SFX_SYNTHS: Record<string, () => void> = {
 };
 
 export type SfxName = keyof typeof SFX_SYNTHS;
-export type BgmTrack = 'module1' | 'module2' | 'module3';
+export type BgmTrack = 'lesson1' | 'lesson2' | 'lesson3' | 'lesson4' | 'lesson5' | 'lesson6' | 'lesson7' | 'lesson8' | 'lesson9' | 'lesson10';
 
 // ── BGM 合成器 ──
 class BgmSynth {
@@ -252,27 +252,34 @@ class BgmSynth {
         this.isPlaying = true;
         this.gainNode.gain.value = muted ? 0 : 0.08;
 
-        // 根据模块选择不同的音阶和节奏
-        const scales: Record<BgmTrack, number[]> = {
-            module1: [261, 293, 329, 392, 440],    // C大调 - 明亮
-            module2: [293, 329, 370, 440, 493],    // D大调 - 进取
-            module3: [349, 392, 440, 523, 587],    // F大调 - 温暖
+        // 每课独立音阶 + 振荡器风格
+        const trackConfig: Record<BgmTrack, { scale: number[], waveType: OscillatorType, tempo: number }> = {
+            lesson1: { scale: [261, 293, 329, 392, 440], waveType: 'sine', tempo: 0.08 },  // C大调 - 时间觉醒·宁静
+            lesson2: { scale: [293, 349, 392, 440, 523], waveType: 'sine', tempo: 0.10 },  // Dm调 - 生产者转身·坚定
+            lesson3: { scale: [329, 392, 440, 493, 587], waveType: 'triangle', tempo: 0.06 },  // E调 - AI不是魔法·理性
+            lesson4: { scale: [349, 440, 523, 587, 659], waveType: 'triangle', tempo: 0.07 },  // F调 - 提问的艺术·灵巧
+            lesson5: { scale: [220, 261, 329, 392, 493], waveType: 'sine', tempo: 0.12 },  // Am调 - 拒绝平庸·深沉
+            lesson6: { scale: [196, 233, 261, 311, 370], waveType: 'sawtooth', tempo: 0.05 },  // G小调 - 信息免疫·紧张
+            lesson7: { scale: [261, 311, 370, 415, 493], waveType: 'triangle', tempo: 0.09 },  // Cm调 - 拆解大象·有序
+            lesson8: { scale: [174, 220, 261, 329, 392], waveType: 'sine', tempo: 0.15 },  // F低调 - 第一性原理·厚重
+            lesson9: { scale: [349, 415, 466, 523, 622], waveType: 'triangle', tempo: 0.06 },  // F#调 - 打造AI员工·科技
+            lesson10: { scale: [392, 493, 587, 659, 784], waveType: 'sine', tempo: 0.08 },  // G大调 - 产品发布会·辉煌
         };
-        const scale = scales[track] || scales.module1;
+        const config = trackConfig[track] || trackConfig.lesson1;
 
         // 创建柔和氛围 pad
-        scale.forEach((freq, i) => {
+        config.scale.forEach((freq, i) => {
             const osc = this.ctx.createOscillator();
             const oscGain = this.ctx.createGain();
-            osc.type = 'sine';
+            osc.type = config.waveType;
             osc.frequency.value = freq * 0.5; // 低八度
-            oscGain.gain.value = 0.15 / scale.length;
+            oscGain.gain.value = 0.15 / config.scale.length;
 
             // 缓慢 "呼吸" 效果
             const lfo = this.ctx.createOscillator();
             const lfoGain = this.ctx.createGain();
             lfo.type = 'sine';
-            lfo.frequency.value = 0.1 + i * 0.02;
+            lfo.frequency.value = config.tempo + i * 0.02;
             lfoGain.gain.value = oscGain.gain.value * 0.5;
             lfo.connect(lfoGain);
             lfoGain.connect(oscGain.gain);
@@ -289,7 +296,7 @@ class BgmSynth {
         const sub = this.ctx.createOscillator();
         const subGain = this.ctx.createGain();
         sub.type = 'sine';
-        sub.frequency.value = scale[0] * 0.25;
+        sub.frequency.value = config.scale[0] * 0.25;
         subGain.gain.value = 0.06;
         sub.connect(subGain);
         subGain.connect(this.gainNode);
@@ -364,9 +371,8 @@ export function useAudioManager() {
     }, []);
 
     const playBgmForLesson = useCallback((lessonId: number) => {
-        if (lessonId <= 2) playBgm('module1');
-        else if (lessonId <= 6) playBgm('module2');
-        else playBgm('module3');
+        const track = `lesson${lessonId}` as BgmTrack;
+        playBgm(track);
     }, [playBgm]);
 
     // 清理

@@ -32,7 +32,7 @@ interface LessonPageClientProps {
 // 生成对话图片路径
 function getDialogueImagePath(lessonId: number, dialogueIndex: number): string {
     const paddedIndex = String(dialogueIndex + 1).padStart(2, '0');
-    return `/images/lessons/l${lessonId}_${paddedIndex}.jpg`;
+    return `/images/lessons/l${lessonId}_${paddedIndex}.webp`;
 }
 
 export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
