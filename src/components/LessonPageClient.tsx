@@ -164,7 +164,7 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
             <div
                 key={`img-layer-${layerIndex}`}
                 className="absolute inset-0 z-[2] transition-opacity duration-700 ease-in-out pointer-events-none"
-                style={{ opacity: isActive && layerLoaded[layerIndex] ? 0.55 : 0 }}
+                style={{ opacity: isActive && layerLoaded[layerIndex] ? 0.25 : 0 }}
             >
                 <Image
                     src={path}
