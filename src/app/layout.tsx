@@ -3,8 +3,8 @@ import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 
 export const metadata: Metadata = {
-  title: "AI 未来生存课 | Next-Gen Engine",
-  description: "10节课教会孩子在AI时代生存——从时间觉醒到价值创造",
+  title: "AI 超级个体 | Vibe Coding 高管实战课",
+  description: "20 节课，从认知破局到组织升级——用 AI 替代百万团队，只需一个人",
 };
 
 export default function RootLayout({
@@ -13,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN">
-      <body className="bg-[#0F0F1F] text-gray-200 antialiased overflow-hidden h-screen">
+    <html lang="zh-CN" suppressHydrationWarning>
+      <body className="bg-[var(--bg-black)] text-[var(--text-primary)] antialiased overflow-hidden h-screen" suppressHydrationWarning>
         <div className="flex h-screen">
           <Sidebar />
           <main className="flex-1 relative overflow-hidden w-full min-w-0">

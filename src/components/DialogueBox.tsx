@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState, useCallback } from 'react';
+import { Bot, AlertTriangle, Briefcase, User, ArrowRight, BookOpen } from 'lucide-react';
 import { DialogueLine } from '@/store/gameStore';
 
 interface DialogueBoxProps {
@@ -10,11 +11,33 @@ interface DialogueBoxProps {
     isLastDialogue?: boolean;
 }
 
+// 将 avatar/speaker 映射到 Lucide 图标
+function getSpeakerIcon(speaker: string, avatar: string) {
+    // 优先使用语义标签
+    if (avatar === 'bot' || /小智|AI 顾问|顾问/.test(speaker)) return <Bot size={20} className="text-[var(--accent-gold)]" />;
+    if (avatar === 'alert' || speaker === '系统') return <AlertTriangle size={20} className="text-amber-400" />;
+    if (avatar === 'case' || speaker === '案例') return <Briefcase size={20} className="text-[var(--accent-teal)]" />;
+    if (avatar === 'persona' || /总|经理|老板/.test(speaker)) return <User size={20} className="text-purple-400" />;
+    // 旧版 emoji 兜底
+    if (/🤖/.test(avatar)) return <Bot size={20} className="text-[var(--accent-gold)]" />;
+    if (/⚠️|💰|✨|📝/.test(avatar)) return <AlertTriangle size={20} className="text-amber-400" />;
+    if (/🧸|🔧|⚔️|🧐|🎨|🇨🇳|🧠|🧮|🎓/.test(avatar)) return <BookOpen size={20} className="text-[var(--accent-teal)]" />;
+    return <Bot size={20} className="text-[var(--accent-gold)]" />;
+}
+
+function getSpeakerColor(speaker: string, avatar: string): string {
+    if (avatar === 'bot' || /小智|AI 顾问|顾问/.test(speaker) || /🤖/.test(avatar)) return 'var(--accent-gold)';
+    if (avatar === 'alert' || speaker === '系统' || /⚠️/.test(avatar)) return 'rgb(251, 191, 36)';
+    if (avatar === 'case' || speaker === '案例') return 'var(--accent-teal)';
+    if (avatar === 'persona' || /总|经理/.test(speaker)) return 'rgb(192, 132, 252)';
+    return 'var(--accent-gold)';
+}
+
 export default function DialogueBox({ line, onNext, isLastDialogue = false }: DialogueBoxProps) {
     const [displayedText, setDisplayedText] = useState('');
     const [isTyping, setIsTyping] = useState(false);
 
-    // Typewriter effect
+    // 打字机效果
     useEffect(() => {
         if (!line) return;
         setDisplayedText('');
@@ -28,7 +51,7 @@ export default function DialogueBox({ line, onNext, isLastDialogue = false }: Di
                 clearInterval(interval);
                 setIsTyping(false);
             }
-        }, 30);
+        }, 25);
         return () => clearInterval(interval);
     }, [line]);
 
@@ -41,7 +64,7 @@ export default function DialogueBox({ line, onNext, isLastDialogue = false }: Di
         }
     }, [isTyping, line, onNext]);
 
-    // Keyboard support
+    // 键盘支持
     useEffect(() => {
         const handler = (e: KeyboardEvent) => {
             if (e.code === 'Space' || e.code === 'Enter') {
@@ -55,59 +78,74 @@ export default function DialogueBox({ line, onNext, isLastDialogue = false }: Di
 
     if (!line) return null;
 
+    const speakerColor = getSpeakerColor(line.speaker, line.avatar);
+
     return (
         <motion.div
-            initial={{ y: 100, opacity: 0 }}
+            initial={{ y: 80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
             className="absolute bottom-0 left-0 w-full z-50"
         >
             <div
-                className="bg-black/90 backdrop-blur-xl border-t-2 border-pink-500/50 px-4 py-3 md:px-8 md:py-6 cursor-pointer min-h-[120px] md:min-h-[180px] flex items-start gap-3 md:gap-5"
+                className="glass border-t border-[var(--border-subtle)] px-4 py-4 md:px-8 md:py-6 cursor-pointer min-h-[100px] md:min-h-[160px] flex items-start gap-3 md:gap-5"
+                style={{ background: 'rgba(10, 10, 10, 0.92)', backdropFilter: 'blur(24px)' }}
                 onClick={handleClick}
             >
-                {/* Avatar */}
-                <div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-gray-800 border-2 border-cyan-400 flex items-center justify-center text-xl md:text-3xl flex-shrink-0 shadow-lg shadow-cyan-500/20">
-                    {line.avatar}
+                {/* Avatar 图标 */}
+                <div
+                    className="w-10 h-10 md:w-14 md:h-14 rounded-xl flex items-center justify-center flex-shrink-0"
+                    style={{
+                        background: `${speakerColor}10`,
+                        border: `1px solid ${speakerColor}30`,
+                    }}
+                >
+                    {getSpeakerIcon(line.speaker, line.avatar)}
                 </div>
 
-                {/* Text */}
-                <div className="flex-1 flex flex-col justify-center min-h-[60px] md:min-h-[100px]">
-                    <div className="text-cyan-400 font-bold mb-1 md:mb-2 text-xs md:text-sm tracking-widest uppercase">
+                {/* 文本区域 */}
+                <div className="flex-1 flex flex-col justify-center min-h-[50px] md:min-h-[90px]">
+                    <div
+                        className="font-semibold mb-1 md:mb-2 text-[10px] md:text-xs tracking-[0.2em] uppercase"
+                        style={{ color: speakerColor, fontFamily: 'var(--font-heading)' }}
+                    >
                         {line.speaker}
                     </div>
                     <AnimatePresence mode="wait">
                         <motion.div
-                            key={displayedText.slice(0, 10)}
-                            className="text-white text-base md:text-xl leading-relaxed"
+                            key={line.text.slice(0, 20)}
+                            className="text-[var(--text-primary)] text-sm md:text-lg leading-relaxed"
+                            style={{ fontFamily: 'var(--font-body)' }}
                         >
                             {displayedText}
                             {isTyping && (
                                 <motion.span
                                     animate={{ opacity: [1, 0] }}
-                                    transition={{ repeat: Infinity, duration: 0.5 }}
-                                    className="inline-block ml-1 w-2 h-5 bg-white"
+                                    transition={{ repeat: Infinity, duration: 0.6 }}
+                                    className="inline-block ml-0.5 w-[2px] h-4 md:h-5"
+                                    style={{ background: speakerColor }}
                                 />
                             )}
                         </motion.div>
                     </AnimatePresence>
                 </div>
 
-                {/* Next indicator */}
+                {/* 继续按钮 */}
                 {!isTyping && (
                     <motion.div
-                        animate={{ y: [0, -5, 0] }}
-                        transition={{ repeat: Infinity, duration: 1 }}
+                        animate={{ x: [0, 4, 0] }}
+                        transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
                         className="self-end flex-shrink-0"
                     >
                         {isLastDialogue ? (
-                            <div className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg shadow-cyan-500/30">
+                            <div className="bg-[var(--accent-gold)] text-black px-4 py-2 rounded-lg text-xs md:text-sm font-semibold flex items-center gap-2 shadow-[0_0_16px_rgba(202,138,4,0.25)]">
                                 <span>下一课</span>
-                                <span>→</span>
+                                <ArrowRight size={14} />
                             </div>
                         ) : (
-                            <div className="bg-pink-500 text-white px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg shadow-pink-500/30">
+                            <div className="glass px-4 py-2 rounded-lg text-xs md:text-sm font-medium text-[var(--text-secondary)] flex items-center gap-2 border border-[var(--border-subtle)] hover:border-[var(--accent-gold)]/30 transition-colors">
                                 <span>继续</span>
-                                <span>▶</span>
+                                <ArrowRight size={14} />
                             </div>
                         )}
                     </motion.div>

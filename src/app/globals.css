@@ -1,29 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Jost:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
+/* ── Design System: OLED Dark + Liquid Glass ── */
 :root {
-  --primary: #FF3366;
-  --secondary: #00CCFF;
-  --bg: #0F0F1F;
+  --bg-black: #0A0A0A;
+  --bg-surface: #121212;
+  --bg-elevated: #1A1A1A;
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(255, 255, 255, 0.12);
+  --text-primary: #F5F5F5;
+  --text-secondary: #A1A1AA;
+  --text-muted: #71717A;
+  --accent-gold: #CA8A04;
+  --accent-gold-dim: rgba(202, 138, 4, 0.15);
+  --accent-teal: #0D9488;
+  --accent-teal-dim: rgba(13, 148, 136, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: 16px;
+  --font-heading: 'Cinzel', serif;
+  --font-body: 'Jost', sans-serif;
+  --transition-fast: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fluid: 600ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 触控优化 */
+/* ── Base Reset ── */
 html {
   touch-action: manipulation;
-  /* 防止双击缩放 */
   -webkit-tap-highlight-color: transparent;
+  color-scheme: dark;
 }
 
-/* 安全区域适配 (iPhone 刘海屏 / 底部横杠) */
 body {
+  font-family: var(--font-body);
+  background: var(--bg-black);
+  color: var(--text-primary);
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
 }
 
-/* Custom scrollbar */
+/* ── Typography ── */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  letter-spacing: 0.02em;
+}
+
+/* ── Liquid Glass Effect ── */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-hover:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* ── Gold Accent Glow ── */
+.glow-gold {
+  box-shadow: 0 0 20px rgba(202, 138, 4, 0.15),
+    0 0 60px rgba(202, 138, 4, 0.05);
+}
+
+.text-gold {
+  color: var(--accent-gold);
+}
+
+.bg-gold-subtle {
+  background: var(--accent-gold-dim);
+}
+
+/* ── Scrollbar (Minimal) ── */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
@@ -31,20 +90,46 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
 }
 
-/* Gradient radial utility */
+/* ── Interactive States (PRO MAX) ── */
+.interactive {
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.interactive:hover {
+  transform: translateY(-1px);
+}
+
+.interactive:active {
+  transform: scale(0.98);
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Gradient Utilities ── */
 .bg-gradient-radial {
   background: radial-gradient(circle at center, var(--tw-gradient-stops));
 }
 
-/* 增大移动端滑块触控区域 */
+/* ── Mobile Touch Optimization ── */
 @media (max-width: 767px) {
   input[type="range"] {
     height: 12px;

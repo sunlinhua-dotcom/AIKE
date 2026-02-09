@@ -10,12 +10,22 @@ interface GenericSceneProps {
 
 const bgMap: Record<string, string> = {
     intro: 'from-[#0F0F2F] via-[#1a1a3e] to-[#0a0a1f]',
+    // Vibe Coding Business Themes
+    office: 'from-[#0f172a] via-[#1e293b] to-[#0f172a]', // Slate
+    meeting: 'from-[#1a1a1a] via-[#2a2a2a] to-[#1a1a1a]', // Neutral Dark
+    factory: 'from-[#1c1917] via-[#292524] to-[#1c1917]', // Stone/Industrial
+    studio: 'from-[#2e1065] via-[#4c1d95] to-[#2e1065]', // Violet/Creative
+    demo: 'from-[#422006] via-[#713f12] to-[#422006]', // Amber/Gold/Stage
+    server: 'from-[#022c22] via-[#0f766e] to-[#022c22]', // Teal/Data center
+    dashboard: 'from-[#0B1120] via-[#111827] to-[#0B1120]', // Deep Blue
+
+    // Legacy maps (keep for safety)
     dark: 'from-[#0a0a0a] via-[#111] to-[#0a0a0a]',
     cyber: 'from-[#0f0f2f] via-[#1a0a3e] to-[#0f0f2f]',
     lab: 'from-[#0a1a2e] via-[#0f2a3e] to-[#0a1628]',
     market: 'from-[#1a1a0a] via-[#2a2a1a] to-[#1a1a0a]',
     arena: 'from-[#2a0a0a] via-[#1a0a1a] to-[#0a0a2a]',
-    forge: 'from-[#1a0a00] via-[#2a1a0a] to-[#1a0a00]',
+    forge: 'from-[#1a0a0a] via-[#2a1a0a] to-[#1a0a0a]',
     summit: 'from-[#0f1a2e] via-[#1a2a4e] to-[#0a1628]',
 };
 
