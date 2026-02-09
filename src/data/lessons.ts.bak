@@ -55,68 +55,6 @@ const lesson1: LessonData = {
             ],
         },
         {
-            id: 'l1-interactive', bg: 'demo', game: 'decision-matrix',
-            gameProps: {
-                title: 'AI 三层认知测试',
-                description: '判断以下场景分别属于 AI 的哪一层？将每个场景拖到正确的层级。',
-                criteria: ['效率提升', '自动化程度', '系统集成度', '成本节省'],
-                options: [
-                    { name: '用 ChatGPT 翻译邮件', description: '每次手动复制粘贴' },
-                    { name: '用 API 自动分析日报', description: '定时从系统拉数据生成分析' },
-                    { name: '搭建 AI 排产系统', description: '全流程自动决策，替代 3 人工作' },
-                    { name: '用 AI 写公众号文章', description: '手动输入提示词，逐篇生成' },
-                ],
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '实战测试：判断以下场景属于玩具层、工具层还是武器层。' },
-            ],
-        },
-        {
-            id: 'l1-quiz', bg: 'demo', game: 'quiz-challenge',
-            gameProps: {
-                title: 'Klarna 案例随堂测',
-                description: '关于 Klarna 裁员 700 人案例，以下说法正确的是？',
-                questions: [
-                    {
-                        question: 'Klarna 裁掉了 700 名客服吗？',
-                        options: ['是的，直接裁员', '错，是用 AI 替代了工作量，员工转岗'],
-                        correctIndex: 1,
-                        explanation: '关键点：AI 承担了工作量，让你可以用同样的人力做更多的事。'
-                    },
-                    {
-                        question: 'AI 客服的主要优势是什么？',
-                        options: ['只会说车轱辘话', '24小时在线且多语言支持', '完全不需要人类监督'],
-                        correctIndex: 1,
-                        explanation: '全年无休 + 35 种语言能力是 AI 的核心优势。'
-                    },
-                    {
-                        question: '引入 AI 后客户满意度如何？',
-                        options: ['下降了', '持平', '提升了'],
-                        correctIndex: 2,
-                        explanation: '不可思议但真实：AI 的响应速度和准确性让满意度提升了。'
-                    }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '随堂测验：检验你对 Klarna 案例的理解。' },
-            ],
-        },
-        {
-            id: 'l1-scenario', bg: 'office', game: 'scenario-simulator',
-            gameProps: {
-                title: '你的起步策略',
-                scenario: '你的公司想引入 AI，但预算有限，团队有抵触情绪。你会怎么做？',
-                choices: [
-                    { id: 'c1', label: '强行推行，全员必须用', consequence: '阻力巨大，员工消极怠工，AI 变成摆设。', score: 1 },
-                    { id: 'c2', label: '找一个痛点小场景试点', consequence: '明智！用小胜仗建立信心，让大家看到好处。', score: 5 },
-                    { id: 'c3', label: '花大钱买最贵的系统', consequence: '浪费预算，没有业务场景支撑，系统也是空的。', score: 2 }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '情境模拟：作为决策者，这第一步怎么迈？' },
-            ],
-        },
-        {
             id: 'l1-klarna', bg: 'news',
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '你可能觉得这些离你很远。那看一个真实案例。' },
@@ -164,52 +102,6 @@ const lesson2: LessonData = {
             ],
         },
         {
-            id: 'l2-match', bg: 'demo', game: 'decision-matrix',
-            gameProps: {
-                title: '模型匹配挑战',
-                description: '将以下业务场景匹配到最合适的 AI 模型类型。',
-                criteria: ['逻辑推理', '创造性', '响应速度', '成本'],
-                options: [
-                    { name: '客户闲聊', description: '需要高情商、低成本', scores: { '逻辑推理': 2, '创造性': 4, '响应速度': 5, '成本': 5 } },
-                    { name: '复杂合同分析', description: '极高准确度，不计成本', scores: { '逻辑推理': 5, '创造性': 1, '响应速度': 2, '成本': 1 } },
-                    { name: '营销文案生成', description: '需要脑洞大开', scores: { '逻辑推理': 3, '创造性': 5, '响应速度': 3, '成本': 3 } }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '实战演练：为你的业务挑兵选将。' },
-            ],
-        },
-        {
-            id: 'l2-interactive', bg: 'demo', game: 'model-comparator',
-            gameProps: {
-                title: 'AI 员工面试室',
-                models: [
-                    { name: 'Claude Opus 4.6', scores: { quality: 9, speed: 6, cost: 4, ease: 7 }, description: '首席合规官：逻辑严谨，审合同利器' },
-                    { name: 'Gemini-3-Pro', scores: { quality: 8, speed: 8, cost: 6, ease: 8 }, description: '创意总监：多模态之王，图文视频全能' },
-                    { name: 'GLM-4.7', scores: { quality: 7, speed: 8, cost: 9, ease: 9 }, description: '中国通特助：中文理解最强，合规无忧' },
-                    { name: 'GPT-5', scores: { quality: 9, speed: 7, cost: 3, ease: 8 }, description: '全能 CEO：综合最强，价格最贵' },
-                    { name: 'DeepSeek-R3', scores: { quality: 8, speed: 9, cost: 10, ease: 7 }, description: '数学天才：推理无敌，白菜价' },
-                ],
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '亲手对比 5 大 AI 模型的能力雷达图，找出最适合你公司的组合。' },
-            ],
-        },
-        {
-            id: 'l2-budget', bg: 'office', game: 'roi-calculator',
-            gameProps: {
-                title: 'AI 团队预算计算器',
-                scenario: {
-                    intro: '你打算组建一个 5 人的内容团队。对比纯人工和人机协作的成本。',
-                    defaults: { '人工月薪': 15000, 'AI月费': 200, '效率倍数': 5 },
-                    unit: '元'
-                }
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '算账时间：AI 员工到底有多便宜？' },
-            ],
-        },
-        {
             id: 'l2-strategy', bg: 'office',
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '现在你知道有哪些 AI 了。但怎么组建你的 AI 团队呢？三个原则。' },
@@ -239,30 +131,6 @@ const lesson3: LessonData = {
                 { speaker: 'AI 顾问', avatar: 'bot', text: '好消息是：你已经有这个能力了。你管人的时候，从来不会只说「你去把那个事搞一下」对吧？' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '你会说清楚：谁来做、做什么、做成什么样、什么时候交。这就是 Prompt Engineering。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '所以我们不教你「编程」，我们教你升级你已有的管理能力。' },
-                { speaker: '系统', avatar: 'alert', text: '黄金管理公式：角色 + 背景 + 任务 + 格式 + 约束。五个要素，缺一不可。' },
-                { speaker: '案例', avatar: 'case', text: '角色 = 告诉 AI 它是谁。「你是 20 年经验的生产总监」比「你是 AI 助手」好 100 倍。' },
-                { speaker: '案例', avatar: 'case', text: '背景 = 给 AI 上下文。「现有订单如下表，B 线周三保养」。没有背景，AI 只能瞎猜。' },
-                { speaker: '案例', avatar: 'case', text: '任务 = 明确目标。「排出最少停机时间的生产计划」。越具体，输出越好。' },
-                { speaker: '案例', avatar: 'case', text: '格式 = 规定输出样式。「用 Excel 表格输出，包含日期、产线、品类三列」。' },
-                { speaker: '案例', avatar: 'case', text: '约束 = 划定边界。「注意 B 线周三停机保养，A 线优先高毛利品类」。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '王总用这个公式给 AI 写排产指令，输出的排产表直接就能用。之前需要 3 个文员做 2 天的工作，现在 30 秒出结果。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '这就是「说人话即编程」。你不用写代码，你只需要把话说清楚。' },
-            ],
-        },
-        {
-            id: 'l3-case', bg: 'demo', game: 'case-analyzer',
-            gameProps: {
-                title: '好 Prompt vs 坏 Prompt',
-                caseStudy: {
-                    title: '文案生成指令',
-                    bad: '帮我写个卖咖啡的公号文章。',
-                    badAnalysis: '太模糊！AI 不知道卖给谁、什么风格、多长。',
-                    good: '角色：资深文案\n目标：写一篇微信推文推广冷萃咖啡\n受众：上班族\n痛点：夏天困、没精神\n风格：这种风格，且带一点幽默\n长度：800字',
-                    goodAnalysis: 'RCG 公式齐全（角色+背景+目标）。AI 秒懂。'
-                }
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '找茬游戏：哪里写得不好？' },
             ],
         },
         {
@@ -286,29 +154,14 @@ const lesson3: LessonData = {
             },
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '现在记住这个黄金公式，它会贯穿整门课。' },
-            ],
-        },
-        {
-            id: 'l3-quiz', bg: 'demo', game: 'quiz-challenge',
-            gameProps: {
-                title: '提示词工程随堂考',
-                questions: [
-                    {
-                        question: 'RCG 公式中的 C 代表什么？',
-                        options: ['Cost (成本)', 'Context (背景信息)', 'Code (代码)'],
-                        correctIndex: 1,
-                        explanation: 'Context 给 AI 上下文，是最关键的一环。'
-                    },
-                    {
-                        question: '为什么 AI 会胡说八道？',
-                        options: ['它坏了', '它不知道它不知道', 'Prompt 给的背景不够'],
-                        correctIndex: 2,
-                        explanation: '大部分幻觉是因为缺乏约束和背景信息。'
-                    }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '知识点测试：RCG 公式掌握了吗？' },
+                { speaker: '系统', avatar: 'alert', text: '黄金管理公式：角色 + 背景 + 任务 + 格式 + 约束。五个要素，缺一不可。' },
+                { speaker: '案例', avatar: 'case', text: '角色 = 告诉 AI 它是谁。「你是 20 年经验的生产总监」比「你是 AI 助手」好 100 倍。' },
+                { speaker: '案例', avatar: 'case', text: '背景 = 给 AI 上下文。「现有订单如下表，B 线周三保养」。没有背景，AI 只能瞎猜。' },
+                { speaker: '案例', avatar: 'case', text: '任务 = 明确目标。「排出最少停机时间的生产计划」。越具体，输出越好。' },
+                { speaker: '案例', avatar: 'case', text: '格式 = 规定输出样式。「用 Excel 表格输出，包含日期、产线、品类三列」。' },
+                { speaker: '案例', avatar: 'case', text: '约束 = 划定边界。「注意 B 线周三停机保养，A 线优先高毛利品类」。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '王总用这个公式给 AI 写排产指令，输出的排产表直接就能用。之前需要 3 个文员做 2 天的工作，现在 30 秒出结果。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '这就是「说人话即编程」。你不用写代码，你只需要把话说清楚。' },
             ],
         },
         {
@@ -340,29 +193,6 @@ const lesson4: LessonData = {
                 { speaker: '案例', avatar: 'case', text: '更可怕的案例：某公司用 AI 自动生成财务报告，里面有一个数据被 AI 自作主张「修正」了。差点造成税务事故。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '所以你必须记住一条铁律：AI 是你的实习生，不是你的导师。它的每一份报告都需要审核。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '不恐惧，不盲信。这是使用 AI 的黄金心态。那具体怎么防御呢？' },
-                { speaker: '系统', avatar: 'alert', text: '第一道防线：要求 AI 标注来源。在 Prompt 里加一句「请标注所有数据的来源，如果无法确认来源请注明」。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '大部分 AI 如果加了这个约束，幻觉率会降低 60%。因为它被迫「承认不知道」。' },
-                { speaker: '系统', avatar: 'alert', text: '第二道防线：交叉验证。重要数据让 2-3 个不同 AI 分别回答，取共识部分。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '就像你不会只听一个员工的汇报就做决策一样——交叉验证是管理常识。' },
-                { speaker: '系统', avatar: 'alert', text: '第三道防线：人工审核。所有 AI 产出在对外发布前必须经人工确认。尤其是数字、法律、医疗类内容。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '流程就是：AI 输出 → 来源核查 → 交叉验证 → 人工审核 → 最终提交。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '听起来麻烦？其实不会。因为 AI 帮你完成了 80% 的工作，你只需要审核 20%。效率依然提升了 5 倍。' },
-            ],
-        },
-        {
-            id: 'l4-matrix', bg: 'demo', game: 'decision-matrix',
-            gameProps: {
-                title: '幻觉类型分类',
-                description: '判断以下 AI 错误属于哪种幻觉？',
-                criteria: ['事实性', '逻辑性', '格式性', '无害性'],
-                options: [
-                    { name: '林黛玉倒拔垂杨柳', description: '实际上是鲁智深', scores: { '事实性': 1, '逻辑性': 5, '格式性': 5, '无害性': 5 } },
-                    { name: '1+1=3', description: '简单的数学错误', scores: { '事实性': 5, '逻辑性': 1, '格式性': 5, '无害性': 5 } },
-                    { name: '输出 JSON 漏了个括号', description: '程序无法解析', scores: { '事实性': 5, '逻辑性': 5, '格式性': 1, '无害性': 5 } }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '火眼金睛：你能看出这是什么错吗？' },
             ],
         },
         {
@@ -390,6 +220,13 @@ const lesson4: LessonData = {
             },
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '答案是建立 SOP（标准操作流程）。三步防线。' },
+                { speaker: '系统', avatar: 'alert', text: '第一道防线：要求 AI 标注来源。在 Prompt 里加一句「请标注所有数据的来源，如果无法确认来源请注明」。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '大部分 AI 如果加了这个约束，幻觉率会降低 60%。因为它被迫「承认不知道」。' },
+                { speaker: '系统', avatar: 'alert', text: '第二道防线：交叉验证。重要数据让 2-3 个不同 AI 分别回答，取共识部分。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '就像你不会只听一个员工的汇报就做决策一样——交叉验证是管理常识。' },
+                { speaker: '系统', avatar: 'alert', text: '第三道防线：人工审核。所有 AI 产出在对外发布前必须经人工确认。尤其是数字、法律、医疗类内容。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '流程就是：AI 输出 → 来源核查 → 交叉验证 → 人工审核 → 最终提交。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '听起来麻烦？其实不会。因为 AI 帮你完成了 80% 的工作，你只需要审核 20%。效率依然提升了 5 倍。' },
             ],
         },
         {
@@ -428,30 +265,6 @@ const lesson5: LessonData = {
             ],
         },
         {
-            id: 'l5-prompt', bg: 'board', game: 'prompt-workshop',
-            gameProps: {
-                title: '需求文档撰写',
-                scenario: {
-                    title: '餐饮管理系统需求',
-                    role: '你是连锁餐厅老板，想做一个 iPad 点餐系统。',
-                    businessTask: '核心功能：扫码点餐、后厨打印、会员积分。',
-                    hints: ['讲清楚谁用', '讲清楚场景', '讲清楚核心功能'],
-                    examples: [
-                        {
-                            label: '点餐系统',
-                            bad: '做一个类似美团的软件',
-                            good: '做一个 iPad 点餐 App，供店内顾客使用。核心功能：1. 扫桌码识别桌号；2. 菜品多图展示；3. 下单后直连后厨打印机。界面风格要简洁大图。',
-                            explanation: '明确了使用场景（店内）、设备（iPad）和核心链路，AI 才能生成可用的界面。'
-                        }
-                    ],
-                    scoringCriteria: ['用户明确', '场景清晰', '功能具体']
-                }
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '练一练：能不能用一句话把你的需求讲清楚？' },
-            ],
-        },
-        {
             id: 'l5-concept', bg: 'layers',
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '五层积木，从下往上：① 需求 → ② 界面 → ③ API → ④ 技能包 → ⑤ 数据连接。' },
@@ -461,12 +274,6 @@ const lesson5: LessonData = {
                 { speaker: '系统', avatar: 'alert', text: '第二层「界面」——AI 根据你的需求描述，直接生成可交互的页面。不需要画原型图，不需要写代码。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '传统流程：需求文档→原型图→UI设计→前端开发→测试，要 30-60 天。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: 'Vibe Coding 流程：一段话→AI 秒生成界面→你看着调整→5 分钟搞定。' },
-                { speaker: '系统', avatar: 'alert', text: '提示：最底层是最基础的，最顶层是最高级的数据能力。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '记住这个架构图。后面四节课，我们会逐层拆解。每一层都会让你的 AI 能力翻一倍。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '对了，你发现了吗——这五层积木和盖房子一模一样。打地基→建框架→装大脑→培训员工→接水电。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '而且每一层都是独立的积木块。你可以先搭两层用起来，后面再加。' },
-                { speaker: '案例', avatar: 'case', text: '赵总就是这么干的——先用前两层做了个能用的官网，后面再慢慢加 AI 客服和数据分析。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '这就对了。不要追求一步到位，先跑起来，再升级。' },
             ],
         },
         {
@@ -485,32 +292,12 @@ const lesson5: LessonData = {
             },
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '动手试试——把五层积木按正确顺序搭起来。' },
-            ],
-        },
-        {
-            id: 'l5-case', bg: 'demo', game: 'case-analyzer',
-            gameProps: {
-                title: 'UI 框架选型',
-                caseStudy: {
-                    title: '前端方案选择',
-                    company: '某初创公司',
-                    industry: '电商',
-                    problem: '老板不懂技术，不知道该选哪种前端框架来做官网。',
-                    data: [
-                        { label: '方案 A', value: 'React + Tailwind (Vibe 推荐)' },
-                        { label: '方案 B', value: 'jQuery 老项目' },
-                        { label: '方案 C', value: '原生 HTML/CSS 手写' }
-                    ],
-                    question: '作为管理者，你应该选择哪个方案？',
-                    options: [
-                        { id: 'a', text: 'React + Tailwind', isCorrect: true, explanation: '正确。这是目前 AI 生成代码质量最高、生态最丰富的组合。Vibe Coding 首选。' },
-                        { id: 'b', text: 'jQuery', isCorrect: false, explanation: '太老旧，AI 对现代框架的支持更好。维护成本高。' },
-                        { id: 'c', text: '原生手写', isCorrect: false, explanation: '效率低，且难以扩展。' }
-                    ]
-                }
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '决策时刻：技术选型不看代码，看生态和效率。' },
+                { speaker: '系统', avatar: 'alert', text: '提示：最底层是最基础的，最顶层是最高级的数据能力。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '记住这个架构图。后面四节课，我们会逐层拆解。每一层都会让你的 AI 能力翻一倍。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '对了，你发现了吗——这五层积木和盖房子一模一样。打地基→建框架→装大脑→培训员工→接水电。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '而且每一层都是独立的积木块。你可以先搭两层用起来，后面再加。' },
+                { speaker: '案例', avatar: 'case', text: '赵总就是这么干的——先用前两层做了个能用的官网，后面再慢慢加 AI 客服和数据分析。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '这就对了。不要追求一步到位，先跑起来，再升级。' },
             ],
         },
         {
@@ -545,24 +332,6 @@ const lesson6: LessonData = {
             ],
         },
         {
-            id: 'l6-arch', bg: 'demo', game: 'architecture-builder',
-            gameProps: {
-                title: 'API 调用链路排序',
-                layers: [
-                    { id: 'user', label: '用户输入', description: '顾客提问：这种茶苦吗？' },
-                    { id: 'prompt', label: 'Prompt 组装', description: '加上角色和知识库上下文' },
-                    { id: 'api', label: 'API 请求', description: '发送给 LLM 大模型' },
-                    { id: 'parse', label: '结果解析', description: '提取回答和情感倾向' },
-                    { id: 'ui', label: '前端展示', description: '在聊天框显示回答' }
-                ],
-                correctOrder: ['user', 'prompt', 'api', 'parse', 'ui'],
-                instruction: '将 API 调用的完整链路按顺序排列'
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '架构师视角：一个请求在后台经历了什么？' },
-            ],
-        },
-        {
             id: 'l6-concept', bg: 'connection',
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: 'API 是什么？打个比方：你的官网是餐厅前台，AI 大模型是后厨大厨。' },
@@ -572,12 +341,6 @@ const lesson6: LessonData = {
                 { speaker: 'AI 顾问', avatar: 'bot', text: '而且 AI 客服的优势不只是便宜。它 24 小时在线、秒级响应、永不疲倦、永不发脾气。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '你不需要选择「AI 还是人」。正解是：AI 做前线接待，人做高价值跟进。' },
                 { speaker: '系统', avatar: 'alert', text: '多模型策略：不同问题给不同 AI。简单问题用便宜快速的 GLM，复杂问题用精准的 Claude。成本可控，质量有保障。' },
-                { speaker: '系统', avatar: 'alert', text: '输入你公司的实际数据，计算器会告诉你 AI 客服的投资回报率。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '大多数老板算完都会沉默 3 秒——因为数字太震撼了。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '但省钱不是最大的价值。最大的价值是：你再也不会错过任何一条线索。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '凌晨 2 点的咨询、节假日的咨询、高峰期排队的咨询——全部被 AI 接住。' },
-                { speaker: '案例', avatar: 'case', text: '张总接入 API 后：线索流失率从 60% 降到 15%，月营收增长 23 万。3 个客服转做顾问式销售，每人产出翻倍。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '这就是 API 的力量——让你的应用从「展示型」变成「对话型」。' },
             ],
         },
         {
@@ -595,21 +358,12 @@ const lesson6: LessonData = {
             },
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '来算一笔账，看看你的企业接入 AI 客服能省多少钱。' },
-            ],
-        },
-        {
-            id: 'l6-model', bg: 'demo', game: 'model-comparator',
-            gameProps: {
-                title: 'API 供应商对比',
-                models: [
-                    { name: 'OpenAI (GPT-4)', scores: { quality: 9, price: 2, speed: 6, eco: 9 }, description: '贵族。质量最好，价格最贵，生态最全。' },
-                    { name: 'Anthropic (Claude)', scores: { quality: 8, price: 5, speed: 7, eco: 7 }, description: '长文专家。读长文档便宜又快。' },
-                    { name: 'DeepSeek (V3)', scores: { quality: 7, price: 10, speed: 9, eco: 5 }, description: '价格屠夫。比 GPT-4 便宜 20 倍。性价比首选。' }
-                ],
-                dimensions: ['quality', 'price', 'speed', 'eco']
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '货比三家：谁是你的高性价比之选？' },
+                { speaker: '系统', avatar: 'alert', text: '输入你公司的实际数据，计算器会告诉你 AI 客服的投资回报率。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '大多数老板算完都会沉默 3 秒——因为数字太震撼了。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '但省钱不是最大的价值。最大的价值是：你再也不会错过任何一条线索。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '凌晨 2 点的咨询、节假日的咨询、高峰期排队的咨询——全部被 AI 接住。' },
+                { speaker: '案例', avatar: 'case', text: '张总接入 API 后：线索流失率从 60% 降到 15%，月营收增长 23 万。3 个客服转做顾问式销售，每人产出翻倍。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '这就是 API 的力量——让你的应用从「展示型」变成「对话型」。' },
             ],
         },
         {
@@ -644,23 +398,6 @@ const lesson7: LessonData = {
             ],
         },
         {
-            id: 'l7-arch', bg: 'demo', game: 'architecture-builder',
-            gameProps: {
-                title: '技能包堆叠顺序',
-                layers: [
-                    { id: 'base', label: '基础模型', description: '通用的 GPT/Claude' },
-                    { id: 'rag', label: 'RAG 知识库', description: '企业私有文档' },
-                    { id: 'tool', label: 'Tool 工具', description: '查天气、搜数据库' },
-                    { id: 'agent', label: 'Agent 代理', description: '自主规划任务' }
-                ],
-                correctOrder: ['base', 'rag', 'tool', 'agent'],
-                instruction: '从基础到高级，搭建 AI 的能力栈'
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '搭建你的 AI 能力金字塔。' },
-            ],
-        },
-        {
             id: 'l7-concept', bg: 'store',
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '技能包本质上就是把你的行业知识结构化后喂给 AI。有三种方式。' },
@@ -670,12 +407,6 @@ const lesson7: LessonData = {
                 { speaker: 'AI 顾问', avatar: 'bot', text: '王总用了哪种？他让 AI 读了 200 页排产规则文档 + 3 年历史排产数据——这就是 RAG。' },
                 { speaker: '案例', avatar: 'case', text: '效果立竿见影：AI 现在知道 A 线产能 500 箱/天、B 线只能做饮料、C 线正在检修到下周三。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '技能包的来源不只是自己写。GitHub 上有大量开源 Skill——搜索→安装→即用。就像手机的 App Store。' },
-                { speaker: '系统', avatar: 'alert', text: '用决策矩阵评估：每个 Skill 在成本节省、实施难度、见效速度、战略价值四个维度打分。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '这个矩阵本身就是一个管理工具——你以后给公司做任何 AI 项目决策都可以用它。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '秘诀：先选见效快的项目（让团队尝到甜头），再选战略价值高的项目（决定长期竞争力）。' },
-                { speaker: '案例', avatar: 'case', text: '王总先装了客服 Skill（1 周见效），再装排产 Skill（1 个月调试）。两步走，稳扎稳打。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '通用 AI 是大学毕业生，加了 Skill 的 AI 是你公司的老员工。懂行，上手就能干活。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '王总给 AI 装了 Skills 后，排产预测准确率从 65% 提升到 97%——这就是知识注入的威力。' },
             ],
         },
         {
@@ -694,29 +425,12 @@ const lesson7: LessonData = {
             },
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '假设你是王总。预算只够装 2 个 Skill，你怎么选？' },
-            ],
-        },
-        {
-            id: 'l7-quiz', bg: 'demo', game: 'quiz-challenge',
-            gameProps: {
-                title: '技能包 vs 原生能力',
-                questions: [
-                    {
-                        question: '我想让 AI 帮我查今天的实时股价，需要什么？',
-                        options: ['原生能力就够了', '需要联网 Skills', '需要微调模型'],
-                        correctIndex: 1,
-                        explanation: '大模型训练数据截止到过去，查实时信息必须用 Skills (Tools)。'
-                    },
-                    {
-                        question: '我想让 AI 如果遇到售后问题就自动发邮件给客服经理。',
-                        options: ['写个 Prompt 就行', '需要邮件发送 Skill', '无法实现'],
-                        correctIndex: 1,
-                        explanation: 'AI 自己不能操作发邮件，必须接入邮件 API 服务作为 Skill。'
-                    }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '随堂测：分清什么是 AI 脑子里的，什么是通过手（Skill）做的。' },
+                { speaker: '系统', avatar: 'alert', text: '用决策矩阵评估：每个 Skill 在成本节省、实施难度、见效速度、战略价值四个维度打分。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '这个矩阵本身就是一个管理工具——你以后给公司做任何 AI 项目决策都可以用它。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '秘诀：先选见效快的项目（让团队尝到甜头），再选战略价值高的项目（决定长期竞争力）。' },
+                { speaker: '案例', avatar: 'case', text: '王总先装了客服 Skill（1 周见效），再装排产 Skill（1 个月调试）。两步走，稳扎稳打。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '通用 AI 是大学毕业生，加了 Skill 的 AI 是你公司的老员工。懂行，上手就能干活。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '王总给 AI 装了 Skills 后，排产预测准确率从 65% 提升到 97%——这就是知识注入的威力。' },
             ],
         },
         {
@@ -752,22 +466,6 @@ const lesson8: LessonData = {
             ],
         },
         {
-            id: 'l8-matrix', bg: 'demo', game: 'decision-matrix',
-            gameProps: {
-                title: '数据源分类',
-                description: '把以下数据源分类到正确的处理方式。',
-                criteria: ['实时连接 (MCP)', '定期导入 (RAG)', '手动输入'],
-                options: [
-                    { name: 'POS 机销售数据', description: '秒级变动，需要实时监控', scores: { '实时连接 (MCP)': 5, '定期导入 (RAG)': 2, '手动输入': 1 } },
-                    { name: '2024 年历史财报', description: '固定不变的文档', scores: { '实时连接 (MCP)': 1, '定期导入 (RAG)': 5, '手动输入': 1 } },
-                    { name: '临时促销活动', description: '突发、非结构化', scores: { '实时连接 (MCP)': 2, '定期导入 (RAG)': 1, '手动输入': 5 } }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '分类练习：哪些数据适合用 MCP 连接？' },
-            ],
-        },
-        {
             id: 'l8-concept', bg: 'network',
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: 'MCP 和传统 API 有什么区别？传统 API 是定制化的——每个系统都要写单独的接口代码。' },
@@ -777,12 +475,6 @@ const lesson8: LessonData = {
                 { speaker: '案例', avatar: 'case', text: '李总接了 MCP 之后：每天早上 AI 自动分析 30 家店的昨日数据，异常自动预警推送到他手机。' },
                 { speaker: '案例', avatar: 'case', text: '有一天，AI 凌晨 3 点推送：「回龙观店的鸡翅进货成本比上月高 30%，建议核查供应商报价。」第二天核实，果然被供应商偷偷涨价。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '不是 AI 替你管店，是 AI 帮你盯住每一个你看不到的角落。' },
-                { speaker: '系统', avatar: 'alert', text: '从最底层的数据源开始，到最顶层的预警输出。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '这就是数据驱动决策的完整链条。数据→连接→分析→展示→行动。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '每一个环节都可以自动化。李总现在每天只花 10 分钟看 AI 生成的日报，就能掌控 30 家店。' },
-                { speaker: '案例', avatar: 'case', text: '效果量化：补货预测准确率 92%，单店月损耗降低 8000 元，30 家店年省 288 万。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '没有 MCP 的 AI 是笼子里的老虎。有了 MCP，它才能真正出来干活。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '记住：数据是 AI 的食物。你喂给它的数据越新鲜、越全面，它做出的判断就越准确。' },
             ],
         },
         {
@@ -801,32 +493,12 @@ const lesson8: LessonData = {
             },
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '动手搭一下：一个完整的 MCP 数据架构是怎么连起来的？' },
-            ],
-        },
-        {
-            id: 'l8-case', bg: 'demo', game: 'case-analyzer',
-            gameProps: {
-                title: 'MCP vs 传统集成',
-                caseStudy: {
-                    title: '多系统数据打通方案',
-                    company: '连锁零售企业',
-                    industry: '零售',
-                    problem: '拥有 ERP、CRM、POS 三套系统，数据不互通。老板想看统一日报。',
-                    data: [
-                        { label: '传统 API 开发', value: '3 个月，15 万' },
-                        { label: '人工导出合并', value: '每天 2 小时，易出错' },
-                        { label: 'MCP 方案', value: '1 周，成本低' }
-                    ],
-                    question: '从性价比和扩展性考虑，你选择哪个方案？',
-                    options: [
-                        { id: 'a', text: '传统 API 开发', isCorrect: false, explanation: '成本高、周期长，且每增加一个新系统都要重新开发接口。' },
-                        { id: 'b', text: 'MCP 方案', isCorrect: true, explanation: '正确。MCP 是标准化协议，一次接入，永久复用。且大模型天生支持 MCP。' },
-                        { id: 'c', text: '继续人工合并', isCorrect: false, explanation: '人力成本高，且数据滞后，无法支持实时决策。' }
-                    ]
-                }
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '决策时刻：技术方案选型。' },
+                { speaker: '系统', avatar: 'alert', text: '从最底层的数据源开始，到最顶层的预警输出。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '这就是数据驱动决策的完整链条。数据→连接→分析→展示→行动。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '每一个环节都可以自动化。李总现在每天只花 10 分钟看 AI 生成的日报，就能掌控 30 家店。' },
+                { speaker: '案例', avatar: 'case', text: '效果量化：补货预测准确率 92%，单店月损耗降低 8000 元，30 家店年省 288 万。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '没有 MCP 的 AI 是笼子里的老虎。有了 MCP，它才能真正出来干活。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '记住：数据是 AI 的食物。你喂给它的数据越新鲜、越全面，它做出的判断就越准确。' },
             ],
         },
         {
@@ -863,23 +535,6 @@ const lesson9: LessonData = {
             ],
         },
         {
-            id: 'l9-arch', bg: 'demo', game: 'architecture-builder',
-            gameProps: {
-                title: '官网模块搭建',
-                layers: [
-                    { id: 'home', label: '首页', description: '品牌形象与核心价值' },
-                    { id: 'prod', label: '产品展示', description: '高清大图与详情' },
-                    { id: 'story', label: '品牌故事', description: '建立信任与情感连接' },
-                    { id: 'contact', label: '在线咨询', description: '转化入口与联系方式' }
-                ],
-                correctOrder: ['home', 'prod', 'story', 'contact'],
-                instruction: '按用户浏览逻辑排列官网板块顺序'
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '架构师视角：规划一个转化率高的官网结构。' },
-            ],
-        },
-        {
             id: 'l9-requirements', bg: 'blueprint',
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '第一步：拆需求。赵总的官网需要哪些板块？' },
@@ -891,30 +546,6 @@ const lesson9: LessonData = {
             ],
         },
         {
-            id: 'l9-prompt', bg: 'board', game: 'prompt-workshop',
-            gameProps: {
-                title: '品牌文案生成',
-                scenario: {
-                    title: '茶叶品牌官网文案',
-                    role: '你是资深品牌策划，服务过只有高端茶叶品牌。',
-                    businessTask: '为「云雾山」高山茶撰写官网首页 Slogan 和品牌简介。',
-                    hints: ['强调产地稀缺性', '突出匠人精神', '营造静谧意境'],
-                    examples: [
-                        {
-                            label: '品牌 Slogan',
-                            bad: '好喝的云雾山茶',
-                            good: '云雾深处，一叶知秋。三百年古树，只取明前那一抹嫩绿。',
-                            explanation: '好的文案有画面感、有情感、有格调。不仅仅是陈述事实。'
-                        }
-                    ],
-                    scoringCriteria: ['意境营造', '卖点突出', '语言优美']
-                }
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '练一练：让 AI 写出月薪 3 万文案的水平。' },
-            ],
-        },
-        {
             id: 'l9-build', bg: 'demo',
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '第二步到第五步，一口气走完。' },
@@ -923,11 +554,6 @@ const lesson9: LessonData = {
                 { speaker: '系统', avatar: 'alert', text: '④ 技能包：把赵总的品牌故事、工艺介绍、价格体系导入，让 AI 像老员工一样回答。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '第五步 MCP 暂时不用——品牌官网不需要连接后台数据系统。先上线再说。' },
                 { speaker: '案例', avatar: 'case', text: '从写需求到上线：2 小时。外包报价 5 万+60 天的活，赵总自己搞定了。' },
-                { speaker: '系统', avatar: 'alert', text: '外包的隐性成本：每次改需求都要追加费用。一年改 6 次，每次 3000 元起步。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '而 AI 自建的迭代成本几乎为零——你改一句话的事。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '真正的差距不只是钱，是速度。外包改一版等一周，AI 改一版等一分钟。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '在移动互联网时代，速度就是生命。快一天上线，就多一天抢占市场。' },
-                { speaker: '案例', avatar: 'case', text: '赵总官网上线后第一周：线上咨询 47 条，其中 AI 自动接待 39 条，人工只处理了 8 条高意向客户。成交 3 单，营收 12 万。' },
             ],
         },
         {
@@ -945,6 +571,11 @@ const lesson9: LessonData = {
             },
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '来算一笔账：自建 vs 外包，到底差多少？' },
+                { speaker: '系统', avatar: 'alert', text: '外包的隐性成本：每次改需求都要追加费用。一年改 6 次，每次 3000 元起步。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '而 AI 自建的迭代成本几乎为零——你改一句话的事。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '真正的差距不只是钱，是速度。外包改一版等一周，AI 改一版等一分钟。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '在移动互联网时代，速度就是生命。快一天上线，就多一天抢占市场。' },
+                { speaker: '案例', avatar: 'case', text: '赵总官网上线后第一周：线上咨询 47 条，其中 AI 自动接待 39 条，人工只处理了 8 条高意向客户。成交 3 单，营收 12 万。' },
             ],
         },
         {
@@ -977,23 +608,6 @@ const lesson10: LessonData = {
             ],
         },
         {
-            id: 'l10-roi', bg: 'demo', game: 'roi-calculator',
-            gameProps: {
-                title: '数据决策价值计算',
-                inputs: [
-                    { id: 'decision_time', label: '传统决策耗时', default: 72, unit: '小时' },
-                    { id: 'ai_time', label: 'AI 辅助决策耗时', default: 0.5, unit: '小时' },
-                    { id: 'loss_per_hour', label: '异常每小时损失', default: 500, unit: '元' },
-                    { id: 'yearly_issues', label: '年异常次数', default: 50, unit: '次' },
-                ],
-                formula: '(decision_time - ai_time) * loss_per_hour * yearly_issues',
-                resultLabel: '年挽回损失',
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '算账：早发现问题 3 天，能省多少钱？' },
-            ],
-        },
-        {
             id: 'l10-design', bg: 'blueprint',
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '看板需要展示什么？不是越多越好——抓住 4 个核心指标就够。' },
@@ -1013,27 +627,6 @@ const lesson10: LessonData = {
                 { speaker: 'AI 顾问', avatar: 'bot', text: '注意：AI 不只是告诉你「跌了」，它告诉你「为什么跌了」。这是传统 BI 工具做不到的。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '传统 BI：你要自己看报表→发现异常→分析原因→做决策。AI 看板：AI 帮你发现异常→分析原因→甚至给出建议。' },
                 { speaker: '系统', avatar: 'alert', text: 'AI 看板 vs 传统 BI：从「人找数据」变成「数据找人」。决策延迟从周级降到分钟级。' },
-                { speaker: '系统', avatar: 'alert', text: '看板给你 4 个关键数据，你需要用逻辑判断最可能的原因。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '这就是老板的价值——AI 给你数据，你做判断。人机协作的典范。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '看板不是替你做决策，是加速你做决策。从看到数据到做出应对，以前 3 天现在 3 分钟。' },
-                { speaker: '案例', avatar: 'case', text: '李总现在的日常：早上 8 点看 AI 看板日报（5 分钟）→ 处理异常预警（10 分钟）→ 剩下的时间专注战略。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '以前是开夜路不开灯，现在灯全开了。你看得清路，自然开得快。' },
-            ],
-        },
-        {
-            id: 'l10-matrix', bg: 'demo', game: 'decision-matrix',
-            gameProps: {
-                title: 'KPI 指标分层',
-                description: '把以下 KPI 指标分到正确的管理层级。',
-                criteria: ['战略层 (老板)', '运营层 (店长)', '执行层 (员工)'],
-                options: [
-                    { name: '净利润率', description: '公司整体盈利能力', scores: { '战略层 (老板)': 5, '运营层 (店长)': 2, '执行层 (员工)': 1 } },
-                    { name: '单店日营收', description: '门店每日业绩', scores: { '战略层 (老板)': 3, '运营层 (店长)': 5, '执行层 (员工)': 2 } },
-                    { name: '出餐速度', description: '具体操作效率', scores: { '战略层 (老板)': 1, '运营层 (店长)': 3, '执行层 (员工)': 5 } }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '分层练习：不同的角色看不同的数据。' },
             ],
         },
         {
@@ -1061,6 +654,11 @@ const lesson10: LessonData = {
             },
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '模拟一下：你是李总，看板报警了，你怎么判断？' },
+                { speaker: '系统', avatar: 'alert', text: '看板给你 4 个关键数据，你需要用逻辑判断最可能的原因。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '这就是老板的价值——AI 给你数据，你做判断。人机协作的典范。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '看板不是替你做决策，是加速你做决策。从看到数据到做出应对，以前 3 天现在 3 分钟。' },
+                { speaker: '案例', avatar: 'case', text: '李总现在的日常：早上 8 点看 AI 看板日报（5 分钟）→ 处理异常预警（10 分钟）→ 剩下的时间专注战略。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '以前是开夜路不开灯，现在灯全开了。你看得清路，自然开得快。' },
             ],
         },
         {
@@ -1093,23 +691,6 @@ const lesson11: LessonData = {
             ],
         },
         {
-            id: 'l11-arch', bg: 'demo', game: 'architecture-builder',
-            gameProps: {
-                title: '智能客服架构',
-                layers: [
-                    { id: 'kb', label: '知识库 RAG', description: '200 页课程资料' },
-                    { id: 'intent', label: '意图识别', description: '判断是咨询还是投诉' },
-                    { id: 'gen', label: '回复生成', description: '组织高情商话术' },
-                    { id: 'human', label: '人工接管', description: '搞不定的转人工' }
-                ],
-                correctOrder: ['kb', 'intent', 'gen', 'human'],
-                instruction: '搭建一个靠谱的 AI 客服系统架构'
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '架构师视角：AI 客服的大脑是怎么工作的？' },
-            ],
-        },
-        {
             id: 'l11-build', bg: 'server',
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '这次的搭建重点在第四层——技能包。因为 AI 客服最怕的是「答非所问」。' },
@@ -1129,11 +710,6 @@ const lesson11: LessonData = {
                 { speaker: 'AI 顾问', avatar: 'bot', text: 'AI 客服还有一个隐藏功能：自动给每条咨询打标签——「高意向」「价格敏感」「在比较竞品」。' },
                 { speaker: '系统', avatar: 'alert', text: '人工客服第二天上班，看到的是 AI 整理好的「今日待跟进」列表，按优先级排好。效率翻倍。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '这就是人机协作的最佳模式：AI 做前线筛选，人做精准转化。各干各擅长的事。' },
-                { speaker: '系统', avatar: 'alert', text: '核心逻辑：转化率提升 × 线索量 × 客单价 = 增量营收。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '大部分教培老板算完这笔账都会后悔——「怎么没有早点用？」' },
-                { speaker: '案例', avatar: 'case', text: '张总的实际数据：线索转化率从 15% 提升到 28%。夜间咨询覆盖率从 0% 到 100%。月增营收 23 万。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '而 AI 客服的月成本不到 200 元。ROI 超过 1000 倍。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '你不需要不睡觉的员工，你需要一个 AI。' },
             ],
         },
         {
@@ -1151,21 +727,11 @@ const lesson11: LessonData = {
             },
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '算一下：AI 客服能给你带来多少增量营收？' },
-            ],
-        },
-        {
-            id: 'l11-sim', bg: 'office', game: 'scenario-simulator',
-            gameProps: {
-                title: '客户投诉模拟',
-                scenario: '家长投诉：「你们承诺的退费怎么还没到账？再不处理就曝光你们！」AI 设置了不同的应对策略，你选哪个？',
-                choices: [
-                    { id: 'c1', label: 'AI 自动回复安抚话术', consequence: '风险！家长正在气头上，AI 的套话可能火上浇油。', score: 2 },
-                    { id: 'c2', label: 'AI 识别情绪 -> 立即转人工经理', consequence: '正解！高危情绪/投诉必须转人工处理，AI 负责识别和预警。', score: 5 },
-                    { id: 'c3', label: 'AI 自动查询并承诺退款', consequence: '危险！涉及资金操作必须有人工审核，AI 不应有直接打款权限。', score: 1 }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '危机公关：这时候该 AI 上还是人上？' },
+                { speaker: '系统', avatar: 'alert', text: '核心逻辑：转化率提升 × 线索量 × 客单价 = 增量营收。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '大部分教培老板算完这笔账都会后悔——「怎么没有早点用？」' },
+                { speaker: '案例', avatar: 'case', text: '张总的实际数据：线索转化率从 15% 提升到 28%。夜间咨询覆盖率从 0% 到 100%。月增营收 23 万。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '而 AI 客服的月成本不到 200 元。ROI 超过 1000 倍。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '你不需要不睡觉的员工，你需要一个 AI。' },
             ],
         },
         {
@@ -1198,23 +764,6 @@ const lesson12: LessonData = {
             ],
         },
         {
-            id: 'l12-roi', bg: 'demo', game: 'roi-calculator',
-            gameProps: {
-                title: '排产效率 ROI',
-                inputs: [
-                    { id: 'manual_time', label: '人工排产耗时', default: 120, unit: '分钟' },
-                    { id: 'ai_time', label: 'AI 排产耗时', default: 10, unit: '分钟' },
-                    { id: 'weekly_freq', label: '每周排产次数', default: 5, unit: '次' },
-                    { id: 'labor_cost', label: '排产员时薪', default: 100, unit: '元' },
-                ],
-                formula: '(manual_time - ai_time) / 60 * weekly_freq * labor_cost * 52',
-                resultLabel: '年节省人力成本',
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '算账：光是排产这一项，一年能省多少钱？' },
-            ],
-        },
-        {
             id: 'l12-design', bg: 'blueprint',
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '排产系统的设计比前三个项目复杂在哪里？它需要多模型协作。' },
@@ -1234,37 +783,6 @@ const lesson12: LessonData = {
                 { speaker: '系统', avatar: 'alert', text: '原来 2 小时的手工排产，现在 10 分钟。而且 AI 不会忘记约束条件——张叔偶尔会忘。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '遇到紧急插单怎么办？以前张叔要重新排 1 小时。现在 AI 重新跑一次，3 分钟出结果。' },
                 { speaker: '案例', avatar: 'case', text: '最让王总满意的功能：AI 会根据库存自动建议「今天该补哪些原料」，避免断供。' },
-                { speaker: '系统', avatar: 'alert', text: '注意：每个环节的输出是下一个环节的输入。顺序很重要。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '这就是「多模型协作」的精髓——每个 AI 各司其职，像一个团队一样配合。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '你不需要一个全能的 AI，你需要一个配合默契的 AI 团队。' },
-                { speaker: '案例', avatar: 'case', text: '王总现在最开心的是：张叔终于可以安心退休了，经验已经被 AI 完整继承。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '这不是取代人，是让知识永生。企业最怕的不是人走了，是人走了把知识也带走了。' },
-            ],
-        },
-        {
-            id: 'l12-case', bg: 'demo', game: 'case-analyzer',
-            gameProps: {
-                title: '排产异常处理',
-                caseStudy: {
-                    title: '紧急插单场景',
-                    company: '王总食品厂',
-                    industry: '制造',
-                    problem: '周五下午 4 点，大客户突然追加 500 箱急单，要求周一早发货。现有产线已排满。',
-                    data: [
-                        { label: '插单量', value: '500 箱' },
-                        { label: '交期', value: '周一早' },
-                        { label: '当前负荷', value: '100%' },
-                    ],
-                    question: 'AI 给出了三个调整方案，作为厂长你选哪个？',
-                    options: [
-                        { id: 'a', text: '拒绝接单，保护现有计划', isCorrect: false, explanation: '得罪大客户，且错失营收。' },
-                        { id: 'b', text: 'AI 算出 C 线周六有 4 小时空窗，安排加班生产', isCorrect: true, explanation: '正确！AI 能发现人类容易忽略的细微空窗期。最优解。' },
-                        { id: 'c', text: '全线暂停现有订单，优先做急单', isCorrect: false, explanation: '导致其他订单全部延期，拆东墙补西墙，得不偿失。' }
-                    ]
-                }
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '决策时刻：如何在不乱套的情况下接下急单？' },
             ],
         },
         {
@@ -1283,6 +801,11 @@ const lesson12: LessonData = {
             },
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '动手搭一下排产系统的多模型流水线。' },
+                { speaker: '系统', avatar: 'alert', text: '注意：每个环节的输出是下一个环节的输入。顺序很重要。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '这就是「多模型协作」的精髓——每个 AI 各司其职，像一个团队一样配合。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '你不需要一个全能的 AI，你需要一个配合默契的 AI 团队。' },
+                { speaker: '案例', avatar: 'case', text: '王总现在最开心的是：张叔终于可以安心退休了，经验已经被 AI 完整继承。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '这不是取代人，是让知识永生。企业最怕的不是人走了，是人走了把知识也带走了。' },
             ],
         },
         {
@@ -1306,29 +829,6 @@ const lesson13: LessonData = {
     module: '模块四 · 项目工坊', icon: 'image',
     scenes: [
         {
-            id: 'l13-quiz', bg: 'demo', game: 'quiz-challenge',
-            gameProps: {
-                title: '电商图片痛点自测',
-                questions: [
-                    {
-                        question: '电商测款最怕什么？',
-                        options: ['库存积压', '模特太贵', '修图太慢'],
-                        correctIndex: 0,
-                        explanation: '测款失败导致库存积压是电商最大的亏损源。AI 生图可以零库存测款。'
-                    },
-                    {
-                        question: 'AI 生图最大的优势是？',
-                        options: ['完全免费', '速度快且无限试错', '能代替摄影师'],
-                        correctIndex: 1,
-                        explanation: 'AI 的核心优势是低成本高速度的无限迭代。'
-                    }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '课前热身：你懂电商的痛吗？' },
-            ],
-        },
-        {
             id: 'l13-pain', bg: 'studio',
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '模块四「项目工坊」开始。6 个垂直行业案例，教你把 AI 用到极致。' },
@@ -1350,27 +850,6 @@ const lesson13: LessonData = {
                 { speaker: 'AI 顾问', avatar: 'bot', text: '200 个 SKU 的图片，传统方式 3 天 1.5 万。AI 方式：10 分钟 + 50 元。' },
                 { speaker: '案例', avatar: 'case', text: '陈总的数据：上新速度从每月 1 次提升到每周 2 次。测款成本从 2000 元/款降到 5 元/款。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '快 10 倍 + 便宜 300 倍。这就是 AI 在电商场景的碾压级优势。' },
-                { speaker: '系统', avatar: 'alert', text: '评估维度：画质、速度、性价比、易用性。不同场景选不同模型。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '陈总的选择：日常出图用 SDXL（免费+快），品牌主图用 Midjourney（质量高）。混合使用最划算。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '记住：没有最好的工具，只有最适合的工具。就像你不会用大炮打蚊子。' },
-                { speaker: '案例', avatar: 'case', text: '电商 AI 产图的隐藏收益：A/B 测试成本归零。同一个款式生成 5 套不同风格的图，看哪套点击率高。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '陈总说：「以前我靠直觉选首图，现在我靠数据。AI 把我从赌徒变成了科学家。」' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '数据驱动的直觉才是真正的商业嗅觉。' },
-            ],
-        },
-        {
-            id: 'l13-sim', bg: 'office', game: 'scenario-simulator',
-            gameProps: {
-                title: 'AI 选图决策',
-                scenario: 'AI 生成了 4 张不同风格的模特图（欧美风、日韩风、国潮风、极简风）。你该如何决策？',
-                choices: [
-                    { id: 'c1', label: '凭感觉选一张自己喜欢的', consequence: '风险！你的审美不代表用户审美。', score: 2 },
-                    { id: 'c2', label: '全部上架进行 A/B 测试', consequence: '正解！让用户点击数据来投票。AI 降低了试错成本。', score: 5 },
-                    { id: 'c3', label: '开会讨论投票决定', consequence: '效率低且依然是主观判断。', score: 3 }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '决策时刻：图做出来了，怎么选？' },
             ],
         },
         {
@@ -1387,6 +866,12 @@ const lesson13: LessonData = {
             },
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '三款主流 AI 图片模型，各有什么优劣？对比看看。' },
+                { speaker: '系统', avatar: 'alert', text: '评估维度：画质、速度、性价比、易用性。不同场景选不同模型。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '陈总的选择：日常出图用 SDXL（免费+快），品牌主图用 Midjourney（质量高）。混合使用最划算。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '记住：没有最好的工具，只有最适合的工具。就像你不会用大炮打蚊子。' },
+                { speaker: '案例', avatar: 'case', text: '电商 AI 产图的隐藏收益：A/B 测试成本归零。同一个款式生成 5 套不同风格的图，看哪套点击率高。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '陈总说：「以前我靠直觉选首图，现在我靠数据。AI 把我从赌徒变成了科学家。」' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '数据驱动的直觉才是真正的商业嗅觉。' },
             ],
         },
         {
@@ -1407,29 +892,6 @@ const lesson14: LessonData = {
     id: 14, title: 'AI 标书工匠', subtitle: 'Workshop: Proposal Master',
     module: '模块四 · 项目工坊', icon: 'file-text',
     scenes: [
-        {
-            id: 'l14-quiz', bg: 'demo', game: 'quiz-challenge',
-            gameProps: {
-                title: '标书痛点自测',
-                questions: [
-                    {
-                        question: '标书没中标最可惜的原因是？',
-                        options: ['价格太高', '技术太差', '低级错误被扣分'],
-                        correctIndex: 2,
-                        explanation: '因为格式或计算错误被扣分是最冤枉的。AI 擅长避免这类低级失误。'
-                    },
-                    {
-                        question: 'AI 写标书的最佳模式是？',
-                        options: ['全自动生成', '人机协作', '只用来查资料'],
-                        correctIndex: 1,
-                        explanation: 'AI 生成初稿 + 人工审核润色 = 效率质量双赢。'
-                    }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '课前热身：标书为什么难写？' },
-            ],
-        },
         {
             id: 'l14-pain', bg: 'meeting',
             dialogue: [
@@ -1452,27 +914,6 @@ const lesson14: LessonData = {
                 { speaker: 'AI 顾问', avatar: 'bot', text: '三个 AI 接力赛：Gemini 读题 → Claude 答题 → GPT 润色。各司其职，2 小时搞定。' },
                 { speaker: '案例', avatar: 'case', text: '最厉害的功能：让 AI 模拟评标专家打分。它能按照评分细则逐项打分，指出扣分风险点。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '刘总看到预打分结果，针对性修改了 3 处薄弱环节。最终得分比预期高了 8 分。' },
-                { speaker: '系统', avatar: 'alert', text: '注意：不是人 OR AI，而是人 AND AI。关键是分工策略。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '最佳实践：AI 打底稿（速度），人审核把关（质量）。这个模式适用于所有文档密集型工作。' },
-                { speaker: '案例', avatar: 'case', text: '刘总的最终成绩：48 小时内完成 120 页技术标。评分 92 分（历史最高），中标。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '中标概率从 15% 提升到 35%。不是因为 AI 写得好，是因为你有更多时间优化策略。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: 'AI 让你从「写标书」升级到「做策略」。层次不一样了。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '这个模式的适用场景：标书、方案书、可研报告、商业计划书——所有长文档都适用。' },
-            ],
-        },
-        {
-            id: 'l14-sim', bg: 'office', game: 'scenario-simulator',
-            gameProps: {
-                title: '标书应急处理',
-                scenario: '距离截标只剩 3 小时，发现技术参数有一处关键数据缺失。',
-                choices: [
-                    { id: 'c1', label: '瞎编一个数据填上去', consequence: '危险！一旦被发现就是废标，且信誉扫地。', score: 1 },
-                    { id: 'c2', label: '让 AI 搜索同类项目数据并推算', consequence: '正解！利用 AI 的检索推理能力，给出最合理的估算值，并注明来源。', score: 5 },
-                    { id: 'c3', label: '放弃投标', consequence: '太可惜了，明明只差一点。', score: 2 }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '危机时刻：3 小时生死时速。' },
             ],
         },
         {
@@ -1500,6 +941,12 @@ const lesson14: LessonData = {
             },
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '模拟决策：你是刘总，48 小时赶标书，怎么分配人和 AI 的工作？' },
+                { speaker: '系统', avatar: 'alert', text: '注意：不是人 OR AI，而是人 AND AI。关键是分工策略。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '最佳实践：AI 打底稿（速度），人审核把关（质量）。这个模式适用于所有文档密集型工作。' },
+                { speaker: '案例', avatar: 'case', text: '刘总的最终成绩：48 小时内完成 120 页技术标。评分 92 分（历史最高），中标。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '中标概率从 15% 提升到 35%。不是因为 AI 写得好，是因为你有更多时间优化策略。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: 'AI 让你从「写标书」升级到「做策略」。层次不一样了。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '这个模式的适用场景：标书、方案书、可研报告、商业计划书——所有长文档都适用。' },
             ],
         },
         {
@@ -1520,29 +967,6 @@ const lesson15: LessonData = {
     id: 15, title: 'OpenClaw 指挥官', subtitle: 'Workshop: Project Commander',
     module: '模块四 · 项目工坊', icon: 'terminal',
     scenes: [
-        {
-            id: 'l15-quiz', bg: 'demo', game: 'quiz-challenge',
-            gameProps: {
-                title: '项目管理痛点自测',
-                questions: [
-                    {
-                        question: '项目延期最常见的原因是？',
-                        options: ['技术太难', '人手不够', '信息同步不到位'],
-                        correctIndex: 2,
-                        explanation: '大多数延期是因为「忘了催」或者「以为对方知道了」。'
-                    },
-                    {
-                        question: 'AI Agent 和普通 AI 的区别是？',
-                        options: ['Agent 更贵', 'Agent 能主动行动', 'Agent 语料更多'],
-                        correctIndex: 1,
-                        explanation: 'Agent 具备感知环境、规划任务、使用工具的主动能力。'
-                    }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '课前热身：你也被「扯皮」困扰吗？' },
-            ],
-        },
         {
             id: 'l15-pain', bg: 'construction',
             dialogue: [
@@ -1565,27 +989,6 @@ const lesson15: LessonData = {
                 { speaker: 'AI 顾问', avatar: 'bot', text: '最巧妙的是：它不打扰日常沟通。它只是默默地听、默默地记、到时候才出来催。' },
                 { speaker: '案例', avatar: 'case', text: '孙总用了 OpenClaw 后的变化：每周生成一份「8 个工地进度周报」，自动标注延期项目和风险点。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '原来孙总写周报要 4 小时。现在 Agent 自动生成，他花 10 分钟看完就行。' },
-                { speaker: '系统', avatar: 'alert', text: '对比两种模式在同一个月内的项目效果。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '核心差异不在于 AI 多做了什么，而在于它「不会遗漏」。人会忘，AI 不会。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '很多项目延期不是因为能力不行，是因为「忘了催」。AI 消灭了人为疏忽。' },
-                { speaker: '案例', avatar: 'case', text: '孙总的数据：工期延误率从 45% 降到 8%。客户满意度从 72 分升到 95 分。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: 'AI 不替你吵架，但它帮你终结扯皮。用证据说话，比拍桌子有效 100 倍。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '这种 Agent 不只适用于装修——任何多方协作的场景都能用：广告项目、软件开发、活动策划。' },
-            ],
-        },
-        {
-            id: 'l15-sim', bg: 'office', game: 'scenario-simulator',
-            gameProps: {
-                title: '项目扯皮仲裁',
-                scenario: '项目会上，设计说「我周一就发图了」，开发说「我根本没收到」。作为项目经理你怎么办？',
-                choices: [
-                    { id: 'c1', label: '让双方翻聊天记录对质', consequence: '耗时耗力，且伤和气。', score: 3 },
-                    { id: 'c2', label: '调出 Agent 自动生成的证据链报告', consequence: '正解！OpenClaw 自动记录了发图时间和接收回执。一秒定责。', score: 5 },
-                    { id: 'c3', label: '各打五十大板', consequence: '不仅没解决问题，还让团队士气低落。', score: 1 }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '管理时刻：如何优雅地终结扯皮？' },
             ],
         },
         {
@@ -1603,6 +1006,12 @@ const lesson15: LessonData = {
             },
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '拖拽时间线，看看传统管理 vs AI 管理的差异。' },
+                { speaker: '系统', avatar: 'alert', text: '对比两种模式在同一个月内的项目效果。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '核心差异不在于 AI 多做了什么，而在于它「不会遗漏」。人会忘，AI 不会。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '很多项目延期不是因为能力不行，是因为「忘了催」。AI 消灭了人为疏忽。' },
+                { speaker: '案例', avatar: 'case', text: '孙总的数据：工期延误率从 45% 降到 8%。客户满意度从 72 分升到 95 分。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: 'AI 不替你吵架，但它帮你终结扯皮。用证据说话，比拍桌子有效 100 倍。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '这种 Agent 不只适用于装修——任何多方协作的场景都能用：广告项目、软件开发、活动策划。' },
             ],
         },
         {
@@ -1623,29 +1032,6 @@ const lesson16: LessonData = {
     id: 16, title: 'AI 内容矩阵', subtitle: 'Workshop: Content Matrix',
     module: '模块四 · 项目工坊', icon: 'pen-tool',
     scenes: [
-        {
-            id: 'l16-quiz', bg: 'demo', game: 'quiz-challenge',
-            gameProps: {
-                title: '内容营销痛点自测',
-                questions: [
-                    {
-                        question: '全域营销最大的难点是？',
-                        options: ['平台太多管不过来', '不知道说什么', '没钱投广告'],
-                        correctIndex: 0,
-                        explanation: '不同平台有不同调性，人工适配成本极高。'
-                    },
-                    {
-                        question: 'AI 写文案最大的价值是？',
-                        options: ['写得比人好', '批量裂变能力', '不用付稿费'],
-                        correctIndex: 1,
-                        explanation: 'AI 能把 1 个卖点瞬间裂变成 100 篇不同风格的文案。'
-                    }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '课前热身：一个人怎么活成一支队伍？' },
-            ],
-        },
         {
             id: 'l16-pain', bg: 'social',
             dialogue: [
@@ -1668,27 +1054,6 @@ const lesson16: LessonData = {
                 { speaker: 'AI 顾问', avatar: 'bot', text: '同样的产品卖点「手工镶嵌，独一无二」，在三个平台变成了三种完全不同的表达。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '而且内容配图也可以 AI 生成——不需要拍照，用 Midjourney 直接出图。' },
                 { speaker: '案例', avatar: 'case', text: '赵总现在的工作流：周一定卖点 → AI 批量生成 5 平台内容 → 人工审核 10 分钟 → 排期发布。全程 1 小时。' },
-                { speaker: '系统', avatar: 'alert', text: '关键要素：角色 + 平台风格 + 字数 + 格式要求 + CTA（行动号召）。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '好的 Prompt 和好的公司 brief 一样——越具体，输出质量越高。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '你甚至可以把 Prompt 做成模板，以后换一个卖点就能批量生产。' },
-                { speaker: '案例', avatar: 'case', text: '赵总积累了 20 个 Prompt 模板（5 平台 × 4 种内容类型）。现在新产品上线，1 小时铺满全网。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '月产出从 20 篇→200 篇。流量成本下降 80%。关键词覆盖率提升 5 倍。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '一人管 5 平台矩阵。这不是科幻，这是现在进行时。' },
-            ],
-        },
-        {
-            id: 'l16-sim', bg: 'office', game: 'scenario-simulator',
-            gameProps: {
-                title: '突发热点跟进',
-                scenario: '周五晚 8 点，突然出现一个与你产品相关的热搜。团队都下班了，怎么追？',
-                choices: [
-                    { id: 'c1', label: '给文案打电话叫回来加班', consequence: '怨声载道，且可能错过热点黄金期。', score: 2 },
-                    { id: 'c2', label: '用 AI 模板 5 分钟生成多平台文案并发布', consequence: '正解！速度是蹭热点的第一要素。AI 能帮你抢占先机。', score: 5 },
-                    { id: 'c3', label: '算了，周末不追热点', consequence: '错失巨大的免费流量机会。', score: 1 }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '实战时刻：拼手速的时候到了。' },
             ],
         },
         {
@@ -1701,6 +1066,12 @@ const lesson16: LessonData = {
             },
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '来练习：同一个卖点，怎么写出不同平台的 Prompt？' },
+                { speaker: '系统', avatar: 'alert', text: '关键要素：角色 + 平台风格 + 字数 + 格式要求 + CTA（行动号召）。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '好的 Prompt 和好的公司 brief 一样——越具体，输出质量越高。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '你甚至可以把 Prompt 做成模板，以后换一个卖点就能批量生产。' },
+                { speaker: '案例', avatar: 'case', text: '赵总积累了 20 个 Prompt 模板（5 平台 × 4 种内容类型）。现在新产品上线，1 小时铺满全网。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '月产出从 20 篇→200 篇。流量成本下降 80%。关键词覆盖率提升 5 倍。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '一人管 5 平台矩阵。这不是科幻，这是现在进行时。' },
             ],
         },
         {
@@ -1721,29 +1092,6 @@ const lesson17: LessonData = {
     id: 17, title: 'AI 经营分析', subtitle: 'Workshop: Business Analyst',
     module: '模块四 · 项目工坊', icon: 'trending-up',
     scenes: [
-        {
-            id: 'l17-quiz', bg: 'demo', game: 'quiz-challenge',
-            gameProps: {
-                title: '经营分析痛点自测',
-                questions: [
-                    {
-                        question: '传统数据分析最大的痛点是？',
-                        options: ['需要学 SQL', '反馈太慢', '图表不够好看'],
-                        correctIndex: 1,
-                        explanation: '反馈太慢导致数据失去时效性，决策总是滞后。'
-                    },
-                    {
-                        question: 'AI 经营分析的核心优势是？',
-                        options: ['完全替代分析师', '自然语言交互+实时反馈', '能自动画图'],
-                        correctIndex: 1,
-                        explanation: '让管理者直接用自然语言对话数据，零门槛且实时。'
-                    }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '课前热身：你还在看 Excel 吗？' },
-            ],
-        },
         {
             id: 'l17-pain', bg: 'data',
             dialogue: [
@@ -1766,26 +1114,6 @@ const lesson17: LessonData = {
                 { speaker: '案例', avatar: 'case', text: 'AI 回答：「回龙观店 -8%（食材成本上升）、望京店 -5%（客流下降）、通州店 -3%（打折促销力度过大）。建议重点关注回龙观店的供应商报价。」' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '注意：AI 不只给你数据——它给你原因和建议。这是传统 BI 做不到的。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '从「我知道发生了什么」升级到「我知道为什么发生+下一步该怎么做」。' },
-                { speaker: '系统', avatar: 'alert', text: '从五个维度评分：学习门槛、实时性、自然语言交互、成本、自定义能力。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '对大部分中小企业来说，AI 对话分析是最优解。零门槛、实时、成本低。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '大企业可以用 Tableau + AI 对话双模式。兼顾深度定制和快速查询。' },
-                { speaker: '案例', avatar: 'case', text: '李总的效率提升：数据分析从 2 天→3 秒。每周多出 8 小时做战略思考。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '老板最稀缺的资源是时间。AI 帮你从数据搬运工变成决策指挥官。' },
-            ],
-        },
-        {
-            id: 'l17-sim', bg: 'office', game: 'scenario-simulator',
-            gameProps: {
-                title: '数据异常诊断',
-                scenario: '周一早晨，AI 提示「上周客流量下降 15%」。你第一步该问 AI 什么？',
-                choices: [
-                    { id: 'c1', label: '问「为什么下降？」', consequence: '正解！直接问原因，AI 会调用归因分析模型告诉你答案。', score: 5 },
-                    { id: 'c2', label: '让店长写一份检查报告', consequence: '传统做法，耗时且可能有水分。', score: 2 },
-                    { id: 'c3', label: '把数据导出 Excel 自己看', consequence: '费时费力，且容易看漏关键点。', score: 1 }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '决策时刻：不要看报表，要问原因。' },
             ],
         },
         {
@@ -1802,6 +1130,11 @@ const lesson17: LessonData = {
             },
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '帮李总选工具：传统 BI、AI 对话分析、还是继续用 Excel？' },
+                { speaker: '系统', avatar: 'alert', text: '从五个维度评分：学习门槛、实时性、自然语言交互、成本、自定义能力。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '对大部分中小企业来说，AI 对话分析是最优解。零门槛、实时、成本低。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '大企业可以用 Tableau + AI 对话双模式。兼顾深度定制和快速查询。' },
+                { speaker: '案例', avatar: 'case', text: '李总的效率提升：数据分析从 2 天→3 秒。每周多出 8 小时做战略思考。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '老板最稀缺的资源是时间。AI 帮你从数据搬运工变成决策指挥官。' },
             ],
         },
         {
@@ -1822,29 +1155,6 @@ const lesson18: LessonData = {
     id: 18, title: '销售供应链闭环', subtitle: 'Workshop: Sales & Supply',
     module: '模块四 · 项目工坊', icon: 'link',
     scenes: [
-        {
-            id: 'l18-quiz', bg: 'demo', game: 'quiz-challenge',
-            gameProps: {
-                title: '产销协同痛点自测',
-                questions: [
-                    {
-                        question: '产销脱节最严重的后果是？',
-                        options: ['销售和生产吵架', '库存积压+交期违约', '老板头疼'],
-                        correctIndex: 1,
-                        explanation: '一边是货卖不掉，一边是单交不出。双重亏损。'
-                    },
-                    {
-                        question: '解决产销脱节的关键是？',
-                        options: ['信息实时透明', '多开协调会', '合并两个部门'],
-                        correctIndex: 0,
-                        explanation: '打破数据墙，让销售和生产共享实时信息。'
-                    }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '课前热身：你的工厂还在「盲人摸象」吗？' },
-            ],
-        },
         {
             id: 'l18-pain', bg: 'factory',
             dialogue: [
@@ -1867,26 +1177,6 @@ const lesson18: LessonData = {
                 { speaker: 'AI 顾问', avatar: 'bot', text: '最精彩的功能：AI 还会给销售发提成激励。「下周 A 线空闲产能 200 箱，推动指定 SKU 提成翻倍。」' },
                 { speaker: '案例', avatar: 'case', text: '效果量化：库存周转天数从 45 天降到 22 天，交期达标率从 78% 升到 96%。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '信息透明带来的效率提升，远超任何管理手段。数据墙推倒，两个部门变成一个团队。' },
-                { speaker: '系统', avatar: 'alert', text: '两个维度：库存成本节省 + 违约赔偿减少。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '大部分工厂老板算完这笔账都很震惊——浪费的钱比想象中多得多。' },
-                { speaker: '案例', avatar: 'case', text: '王总的真实数据：年节省库存成本 120 万 + 年减少违约赔偿 29 万 = 年省 149 万。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '而整套 AI 系统的搭建+运维成本：年 5 万。ROI 接近 30 倍。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '这就是为什么说 AI 不是成本开支——它是投资。而且是回报率极高的投资。' },
-            ],
-        },
-        {
-            id: 'l18-sim', bg: 'office', game: 'scenario-simulator',
-            gameProps: {
-                title: '产能冲突调度',
-                scenario: '销售接了个急单，但产线满了。AI 提示「D 线周三有空窗，但需要支付加班费」。你如何决策？',
-                choices: [
-                    { id: 'c1', label: '拒接急单，不想付加班费', consequence: '错失高毛利订单。', score: 2 },
-                    { id: 'c2', label: '接单并安排加班，哪怕成本增加', consequence: '正解！AI 算过帐：急单毛利远高于加班费。利润最大化。', score: 5 },
-                    { id: 'c3', label: '让生产部自己想办法', consequence: '把压力转嫁给一线，没有任何建设性。', score: 1 }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '实战时刻：AI 帮你算清隐形成本。' },
             ],
         },
         {
@@ -1904,6 +1194,11 @@ const lesson18: LessonData = {
             },
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '算一下：打通产销链条能省多少钱？' },
+                { speaker: '系统', avatar: 'alert', text: '两个维度：库存成本节省 + 违约赔偿减少。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '大部分工厂老板算完这笔账都很震惊——浪费的钱比想象中多得多。' },
+                { speaker: '案例', avatar: 'case', text: '王总的真实数据：年节省库存成本 120 万 + 年减少违约赔偿 29 万 = 年省 149 万。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '而整套 AI 系统的搭建+运维成本：年 5 万。ROI 接近 30 倍。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '这就是为什么说 AI 不是成本开支——它是投资。而且是回报率极高的投资。' },
             ],
         },
         {
@@ -1927,29 +1222,6 @@ const lesson19: LessonData = {
     module: '模块五 · 战略升维', icon: 'flag',
     scenes: [
         {
-            id: 'l19-quiz', bg: 'demo', game: 'quiz-challenge',
-            gameProps: {
-                title: '落地战略自测',
-                questions: [
-                    {
-                        question: 'AI 落地最容易失败的原因是？',
-                        options: ['技术不行', '贪大求全', '预算不够'],
-                        correctIndex: 1,
-                        explanation: '上来就想搞全公司转型的，几乎都会失败。要单点突破。'
-                    },
-                    {
-                        question: '如何说服老板/团队用 AI？',
-                        options: ['讲技术多厉害', '讲未来趋势', '讲省了多少钱'],
-                        correctIndex: 2,
-                        explanation: '用数据说话，用 ROI 证明价值。'
-                    }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '课前热身：为什么很多人学了 AI 用不起来？' },
-            ],
-        },
-        {
             id: 'l19-pain', bg: 'office',
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '很多老板学完 AI 课程回到公司，发现落不了地。为什么？' },
@@ -1970,26 +1242,6 @@ const lesson19: LessonData = {
                 { speaker: '系统', avatar: 'alert', text: '第 4 步·推广：用试点的成果说服其他部门。数据说话比画饼有效 100 倍。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '关键心法：不要讲「AI 多厉害」——讲「这个月省了 XX 万」。老板的语言是数字，不是技术。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '如果你就是老板：不要问「AI 能做什么」——问「我公司最痛的问题是什么，AI 能不能解？」' },
-                { speaker: '系统', avatar: 'alert', text: '从五个维度评估。得分最高的场景就是你的「突破口」。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '99% 的企业第一个 AI 项目应该从客服或内容生产开始——门槛低、效果快、容易说服团队。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '千万不要一上来就搞「全面 AI 转型」。这跟减肥一样——不是所有人都适合直接跑马拉松。' },
-                { speaker: '案例', avatar: 'case', text: '最佳实践：先用 AI 客服省下 3 个人的薪资→ 用省下的钱投入数据看板→ 逐步扩展到全链条。' },
-                { speaker: 'AI 顾问', avatar: 'bot', text: '小步快跑、以战养战。每一个成功的小项目都是下一步的信心和预算来源。' },
-            ],
-        },
-        {
-            id: 'l19-sim', bg: 'office', game: 'scenario-simulator',
-            gameProps: {
-                title: '落地路径选择',
-                scenario: '公司有三个痛点：1. 客服回复慢 2. 研发效率低 3. 供应链混乱。你选哪个作为 AI 落地的第一站？',
-                choices: [
-                    { id: 'c1', label: '供应链（最痛的点）', consequence: '太难了！供应链涉及多部门协调，起步容易夭折。', score: 2 },
-                    { id: 'c2', label: '客服（最容易的点）', consequence: '正解！客服场景单一、数据标准化、效果立竿见影。最适合做标杆。', score: 5 },
-                    { id: 'c3', label: '研发（最高大上的点）', consequence: '门槛高，且只有研发懂，难以在全公司推广经验。', score: 3 }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '战略时刻：第一枪往哪里打？' },
             ],
         },
         {
@@ -2006,6 +1258,11 @@ const lesson19: LessonData = {
             },
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '用决策矩阵帮你选：回公司后第一个 AI 项目做什么？' },
+                { speaker: '系统', avatar: 'alert', text: '从五个维度评估。得分最高的场景就是你的「突破口」。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '99% 的企业第一个 AI 项目应该从客服或内容生产开始——门槛低、效果快、容易说服团队。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '千万不要一上来就搞「全面 AI 转型」。这跟减肥一样——不是所有人都适合直接跑马拉松。' },
+                { speaker: '案例', avatar: 'case', text: '最佳实践：先用 AI 客服省下 3 个人的薪资→ 用省下的钱投入数据看板→ 逐步扩展到全链条。' },
+                { speaker: 'AI 顾问', avatar: 'bot', text: '小步快跑、以战养战。每一个成功的小项目都是下一步的信心和预算来源。' },
             ],
         },
         {
@@ -2027,29 +1284,6 @@ const lesson20: LessonData = {
     module: '模块五 · 战略升维', icon: 'award',
     scenes: [
         {
-            id: 'l20-quiz', bg: 'demo', game: 'quiz-challenge',
-            gameProps: {
-                title: '毕业挑战赛',
-                questions: [
-                    {
-                        question: '构建 AI 应用的五层积木顺序是？',
-                        options: ['API-数据-模型-界面-技能', '需求-界面-API-技能-数据', '模型-数据-API-界面-需求'],
-                        correctIndex: 1,
-                        explanation: '需求定义->用户界面->API连接->技能注入->数据打通。'
-                    },
-                    {
-                        question: 'AI 时代最大的竞争优势是？',
-                        options: ['拥有更多算力', '拥有更多数据', '行动速度'],
-                        correctIndex: 2,
-                        explanation: '技术和数据都会普及，唯有行动速度是不可复制的优势。'
-                    }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '最终考验：你真的学会了吗？' },
-            ],
-        },
-        {
             id: 'l20-review', bg: 'stage',
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '恭喜你走到了最后一课。来回顾一下这 20 节课你走过的路。' },
@@ -2062,21 +1296,6 @@ const lesson20: LessonData = {
             ],
         },
         {
-            id: 'l20-sim', bg: 'cosmos', game: 'scenario-simulator',
-            gameProps: {
-                title: '未来决策模拟',
-                scenario: '你的行业出现了颠覆性的 AI 新技术。竞争对手还没动静。你怎么办？',
-                choices: [
-                    { id: 'c1', label: '再观望一下，让子弹飞一会儿', consequence: '错过窗口期。在这个时代，晚一个月就是落后一代。', score: 2 },
-                    { id: 'c2', label: '立刻组织小团队进行 MVP 测试', consequence: '正解！由小切口快速验证，抢占先机。即使失败成本也很低。', score: 5 },
-                    { id: 'c3', label: '全面押注，投入所有资源跟进', consequence: '风险太大。在看不清形势时，盲目梭哈是赌博。', score: 1 }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '模拟未来：当下一个浪潮来临时。' },
-            ],
-        },
-        {
             id: 'l20-future', bg: 'cosmos',
             dialogue: [
                 { speaker: 'AI 顾问', avatar: 'bot', text: '最后，分享三个判断未来趋势的关键认知。' },
@@ -2085,22 +1304,6 @@ const lesson20: LessonData = {
                 { speaker: 'AI 顾问', avatar: 'bot', text: '第三：最大的竞争优势不是技术——是速度。谁先用 AI 落地，谁就吃到最大的红利。' },
                 { speaker: '系统', avatar: 'alert', text: '这不是未来学——这是正在发生的现实。你在这门课里看到的所有案例，都是 2024-2025 年的真实故事。' },
                 { speaker: 'AI 顾问', avatar: 'bot', text: '你现在拥有的知识，比 95% 的企业管理者都多。问题只有一个：你行动了吗？' },
-            ],
-        },
-        {
-            id: 'l20-matrix', bg: 'summit', game: 'decision-matrix',
-            gameProps: {
-                title: '行动承诺书',
-                description: '为你的 AI 转型之路设定优先级。',
-                criteria: ['本周完成', '本月完成', '本季度完成'],
-                options: [
-                    { name: '列出痛点清单', description: '审计公司重复工作', scores: { '本周完成': 5, '本月完成': 3, '本季度完成': 1 } },
-                    { name: '跑通第一个试点', description: '如 AI 客服或生图', scores: { '本周完成': 1, '本月完成': 5, '本季度完成': 3 } },
-                    { name: '全员 AI 培训', description: '建立数字化共识', scores: { '本周完成': 2, '本月完成': 3, '本季度完成': 5 } }
-                ]
-            },
-            dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '最后一步：写下你的承诺。' },
             ],
         },
         {

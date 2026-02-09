@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BookOpen, ChevronRight, ChevronLeft, Volume2, VolumeX } from 'lucide-react';
+import { BookOpen, ChevronRight, ChevronLeft, Volume2, VolumeX, CheckCircle, GraduationCap } from 'lucide-react';
 import { useGameStore } from '@/store/gameStore';
 import { allLessons } from '@/data/lessons';
 import { useAudioManager } from '@/components/AudioManager';
@@ -18,6 +18,8 @@ const ArchitectureBuilder = dynamic(() => import('@/components/games/Architectur
 const CaseAnalyzer = dynamic(() => import('@/components/games/CaseAnalyzer'), { ssr: false });
 const ModelComparator = dynamic(() => import('@/components/games/ModelComparator'), { ssr: false });
 const TimelineExplorer = dynamic(() => import('@/components/games/TimelineExplorer'), { ssr: false });
+const QuizChallenge = dynamic(() => import('@/components/games/QuizChallenge'), { ssr: false });
+const ScenarioSimulator = dynamic(() => import('@/components/games/ScenarioSimulator'), { ssr: false });
 
 interface LessonPageClientProps {
     lessonId: number;
@@ -65,6 +67,7 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
     const [sceneIndex, setSceneIndex] = useState(0);
     const [localDialogueIndex, setLocalDialogueIndex] = useState(0);
     const [imgLoaded, setImgLoaded] = useState(false);
+    const [completionState, setCompletionState] = useState<'none' | 'lesson' | 'course'>('none');
 
     const { playSfx, toggleMute, isMuted, playBgmForLesson } = useAudioManager();
 
@@ -90,6 +93,7 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
         setLesson(lessonId);
         setSceneIndex(0);
         setLocalDialogueIndex(0);
+        setCompletionState('none');
         reset();
         playBgmForLesson(lessonId);
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -101,16 +105,34 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
     // ─── 导航逻辑 ───
 
     const goNext = useCallback(() => {
-        if (!currentScene) return;
+        if (!currentScene || completionState !== 'none') return;
         const line = currentScene.dialogue[localDialogueIndex];
         playSfx('click');
 
-        if (line?.action === 'completeLesson' || line?.action === 'completeCourse') {
+        // 检查是否为完成动作
+        if (line?.action === 'completeLesson') {
             addProducerScore(10);
             completeLesson(lessonId);
             playSfx('levelup');
+            setCompletionState('lesson');
+            // 2 秒后自动跳转下一课
+            const nextLessonId = lessonId + 1;
+            const nextLesson = allLessons.find(l => l.id === nextLessonId);
+            setTimeout(() => {
+                if (nextLesson) router.push(`/lesson/${nextLessonId}`);
+                else router.push('/');
+            }, 2000);
+            return;
+        }
+        if (line?.action === 'completeCourse') {
+            addProducerScore(10);
+            completeLesson(lessonId);
+            playSfx('levelup');
+            setCompletionState('course');
+            return; // 毕业卡片，不自动跳转
         }
 
+        // 正常翻页
         if (localDialogueIndex < currentScene.dialogue.length - 1) {
             setLocalDialogueIndex(prev => prev + 1);
             nextStep();
@@ -119,13 +141,8 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
             setLocalDialogueIndex(0);
             nextStep();
             playSfx('whoosh');
-        } else {
-            const nextLessonId = lessonId + 1;
-            const nextLesson = allLessons.find(l => l.id === nextLessonId);
-            if (nextLesson) router.push(`/lesson/${nextLessonId}`);
-            else router.push('/');
         }
-    }, [currentScene, localDialogueIndex, sceneIndex, scenes, nextStep, addProducerScore, completeLesson, lessonId, playSfx, router]);
+    }, [currentScene, localDialogueIndex, sceneIndex, scenes, nextStep, addProducerScore, completeLesson, lessonId, playSfx, router, completionState]);
 
     const goPrev = useCallback(() => {
         if (localDialogueIndex > 0) {
@@ -166,6 +183,8 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
         if (g === 'case-analyzer') return <CaseAnalyzer {...p} />;
         if (g === 'model-comparator') return <ModelComparator {...p} />;
         if (g === 'timeline-explorer') return <TimelineExplorer {...p} />;
+        if (g === 'quiz-challenge') return <QuizChallenge {...p} />;
+        if (g === 'scenario-simulator') return <ScenarioSimulator {...p} />;
         return null;
     }, [currentScene]);
 
@@ -344,6 +363,51 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
                     </motion.div>
                 </AnimatePresence>
             </div>
+
+            {/* ─── 课程完成覆盖层 ─── */}
+            <AnimatePresence>
+                {completionState !== 'none' && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="absolute inset-0 z-50 flex items-center justify-center"
+                        style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(16px)' }}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+                            className="text-center max-w-md px-8"
+                        >
+                            {completionState === 'lesson' ? (
+                                <>
+                                    <CheckCircle size={56} className="mx-auto mb-4 text-[var(--accent-gold)]" />
+                                    <h2 className="text-2xl font-bold text-white mb-2" style={{ fontFamily: 'var(--font-heading)' }}>
+                                        ✅ 本课完成
+                                    </h2>
+                                    <p className="text-white/50 text-sm">即将进入下一课…</p>
+                                    <div className="mt-4 w-8 h-8 mx-auto border-2 border-white/10 border-t-[var(--accent-gold)] rounded-full animate-spin" />
+                                </>
+                            ) : (
+                                <>
+                                    <GraduationCap size={64} className="mx-auto mb-4 text-[var(--accent-gold)]" />
+                                    <h2 className="text-3xl font-bold text-white mb-3" style={{ fontFamily: 'var(--font-heading)' }}>
+                                        🎓 恭喜毕业！
+                                    </h2>
+                                    <p className="text-white/60 text-base mb-6">全部 20 课已完成，你已获得「AI 指挥官」认证。</p>
+                                    <button
+                                        onClick={() => router.push('/')}
+                                        className="px-6 py-3 rounded-xl bg-[var(--accent-gold)] text-black font-semibold text-sm hover:shadow-[0_0_24px_rgba(202,138,4,0.4)] transition-all"
+                                    >
+                                        返回首页
+                                    </button>
+                                </>
+                            )}
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             {/* ─── 底部导航栏 ─── */}
             <div className="flex items-center justify-between px-4 md:px-8 py-4 md:py-5 flex-shrink-0 z-20">

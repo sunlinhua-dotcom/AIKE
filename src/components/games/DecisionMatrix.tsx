@@ -1,42 +1,102 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, XCircle, BarChart3, ArrowRight } from 'lucide-react';
 
-interface Option {
+// ─── 标准化后的内部类型 ───
+interface NormalizedOption {
     id: string;
     label: string;
-    scores: Record<string, number>;  // dimension -> score (1-5)
+    scores: Record<string, number>;
 }
 
+// ─── 对外接口：兼容新旧两种格式 ───
 interface DecisionMatrixProps {
-    title: string;
-    description: string;
-    dimensions: string[];
-    options: Option[];
+    title?: string;
+    description?: string;
+    // 新格式
+    dimensions?: string[];
+    // 旧格式
+    criteria?: string[];
+    // 兼容两种 option 格式
+    options?: Array<{
+        id?: string;
+        label?: string;
+        name?: string;
+        description?: string;
+        scores?: Record<string, number> | number[];
+    }>;
     correctId?: string;
     onComplete?: () => void;
+    // 额外兼容字段 (忽略)
+    weights?: number[];
+    [key: string]: unknown;
 }
 
-export default function DecisionMatrix({
-    title, description, dimensions, options, correctId, onComplete
-}: DecisionMatrixProps) {
+/**
+ * 将 gameProps 原始 options 标准化为组件内部使用的格式
+ */
+function normalizeData(props: DecisionMatrixProps): {
+    dims: string[];
+    opts: NormalizedOption[];
+} {
+    const dims = props.dimensions ?? props.criteria ?? [];
+
+    const rawOptions = props.options ?? [];
+    const opts: NormalizedOption[] = rawOptions.map((o, idx) => {
+        const id = o.id ?? `opt-${idx}`;
+        const label = o.label ?? o.name ?? `方案 ${idx + 1}`;
+
+        // scores 可能是 Record<string, number> 或 number[]
+        let scores: Record<string, number> = {};
+        if (o.scores) {
+            if (Array.isArray(o.scores)) {
+                // 数组格式 → 映射到 dims
+                dims.forEach((d, i) => {
+                    scores[d] = (o.scores as number[])[i] ?? 0;
+                });
+            } else {
+                scores = o.scores as Record<string, number>;
+            }
+        }
+
+        return { id, label, scores };
+    });
+
+    return { dims, opts };
+}
+
+export default function DecisionMatrix(props: DecisionMatrixProps) {
+    const { title = '决策矩阵', description = '请选择最优方案', onComplete, correctId } = props;
+
+    const { dims, opts } = useMemo(() => normalizeData(props), [props]);
+
     const [selectedId, setSelectedId] = useState<string | null>(null);
     const [showResult, setShowResult] = useState(false);
 
-    const totalScores = options.map(opt => ({
+    // 防御：如果 dims 或 opts 为空直接渲染占位
+    if (!dims.length || !opts.length) {
+        return (
+            <div className="w-full max-w-3xl mx-auto p-6 text-center text-[var(--text-muted)]">
+                <BarChart3 size={24} className="mx-auto mb-2 opacity-40" />
+                <p className="text-sm">决策矩阵加载中...</p>
+            </div>
+        );
+    }
+
+    const totalScores = opts.map(opt => ({
         ...opt,
-        total: dimensions.reduce((sum, d) => sum + (opt.scores[d] || 0), 0),
+        total: dims.reduce((sum, d) => sum + (opt.scores[d] || 0), 0),
     })).sort((a, b) => b.total - a.total);
 
     const bestOption = totalScores[0];
 
-    const handleSubmit = useCallback(() => {
+    const handleSubmit = () => {
         if (!selectedId) return;
         setShowResult(true);
         if (onComplete) setTimeout(onComplete, 2000);
-    }, [selectedId, onComplete]);
+    };
 
     return (
         <div className="w-full max-w-3xl mx-auto p-6">
@@ -58,7 +118,7 @@ export default function DecisionMatrix({
                             <th className="text-left p-3 text-[var(--text-muted)] font-normal text-xs uppercase tracking-wider">
                                 方案
                             </th>
-                            {dimensions.map(d => (
+                            {dims.map(d => (
                                 <th key={d} className="p-3 text-center text-[var(--text-muted)] font-normal text-xs uppercase tracking-wider">
                                     {d}
                                 </th>
@@ -69,8 +129,8 @@ export default function DecisionMatrix({
                         </tr>
                     </thead>
                     <tbody>
-                        {options.map(opt => {
-                            const total = dimensions.reduce((sum, d) => sum + (opt.scores[d] || 0), 0);
+                        {opts.map(opt => {
+                            const total = dims.reduce((sum, d) => sum + (opt.scores[d] || 0), 0);
                             const isSelected = selectedId === opt.id;
                             const isBest = showResult && opt.id === bestOption.id;
 
@@ -94,15 +154,15 @@ export default function DecisionMatrix({
                                             {opt.label}
                                         </div>
                                     </td>
-                                    {dimensions.map(d => (
+                                    {dims.map(d => (
                                         <td key={d} className="p-3 text-center">
                                             <div className="flex items-center justify-center gap-0.5">
                                                 {Array.from({ length: 5 }, (_, i) => (
                                                     <div
                                                         key={i}
                                                         className={`w-2 h-2 rounded-full transition-colors ${i < (opt.scores[d] || 0)
-                                                                ? 'bg-[var(--accent-gold)]'
-                                                                : 'bg-white/10'
+                                                            ? 'bg-[var(--accent-gold)]'
+                                                            : 'bg-white/10'
                                                             }`}
                                                     />
                                                 ))}
@@ -141,8 +201,8 @@ export default function DecisionMatrix({
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         className={`p-4 rounded-xl flex items-start gap-3 ${selectedId === bestOption.id
-                                ? 'bg-emerald-500/10 border border-emerald-500/20'
-                                : 'bg-amber-500/10 border border-amber-500/20'
+                            ? 'bg-emerald-500/10 border border-emerald-500/20'
+                            : 'bg-amber-500/10 border border-amber-500/20'
                             }`}
                     >
                         {selectedId === bestOption.id ? (
