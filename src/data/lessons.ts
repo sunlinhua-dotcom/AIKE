@@ -166,17 +166,18 @@ const lesson2: LessonData = {
         {
             id: 'l2-match', bg: 'demo', game: 'decision-matrix',
             gameProps: {
-                title: '模型匹配挑战',
-                description: '将以下业务场景匹配到最合适的 AI 模型类型。',
-                criteria: ['逻辑推理', '创造性', '响应速度', '成本'],
+                title: '场景选将：谁来做这件事？',
+                description: '下面有 3 个真实业务场景，每个场景需要不同类型的 AI。阅读场景描述，选出最适合的方案。',
+                criteria: ['逻辑推理', '创造性', '响应速度', '成本效益'],
                 options: [
-                    { name: '客户闲聊', description: '需要高情商、低成本', scores: { '逻辑推理': 2, '创造性': 4, '响应速度': 5, '成本': 5 } },
-                    { name: '复杂合同分析', description: '极高准确度，不计成本', scores: { '逻辑推理': 5, '创造性': 1, '响应速度': 2, '成本': 1 } },
-                    { name: '营销文案生成', description: '需要脑洞大开', scores: { '逻辑推理': 3, '创造性': 5, '响应速度': 3, '成本': 3 } }
-                ]
+                    { id: 'chat', name: '🗣️ 客户闲聊接待', description: '每天 500+ 条咨询，80% 是重复问题。要求秒回、情商高、成本低。', scores: { '逻辑推理': 2, '创造性': 3, '响应速度': 5, '成本效益': 5 } },
+                    { id: 'contract', name: '📋 复杂合同审查', description: '每份合同 30 页，涉及法律条款和风险点。错一个字赔 100 万。', scores: { '逻辑推理': 5, '创造性': 1, '响应速度': 1, '成本效益': 1 } },
+                    { id: 'marketing', name: '✍️ 营销文案生成', description: '每周产出 20 篇推文 + 10 条短视频脚本。要求风格多变、脑洞大开。', scores: { '逻辑推理': 2, '创造性': 5, '响应速度': 3, '成本效益': 3 } }
+                ],
+                correctId: 'chat',
             },
             dialogue: [
-                { speaker: '系统', avatar: 'alert', text: '实战演练：为你的业务挑兵选将。' },
+                { speaker: '系统', avatar: 'alert', text: '实战演练：三个场景，哪个最适合用「便宜快速」的 AI 来搞定？选对了说明你理解了模型分级的核心逻辑。' },
             ],
         },
         {
@@ -184,11 +185,11 @@ const lesson2: LessonData = {
             gameProps: {
                 title: 'AI 员工面试室',
                 models: [
-                    { name: 'Claude Opus 4.6', scores: { quality: 9, speed: 6, cost: 4, ease: 7 }, description: '首席合规官：逻辑严谨，审合同利器' },
-                    { name: 'Gemini-3-Pro', scores: { quality: 8, speed: 8, cost: 6, ease: 8 }, description: '创意总监：多模态之王，图文视频全能' },
-                    { name: 'GLM-4.7', scores: { quality: 7, speed: 8, cost: 9, ease: 9 }, description: '中国通特助：中文理解最强，合规无忧' },
-                    { name: 'GPT-5', scores: { quality: 9, speed: 7, cost: 3, ease: 8 }, description: '全能 CEO：综合最强，价格最贵' },
-                    { name: 'DeepSeek-R3', scores: { quality: 8, speed: 9, cost: 10, ease: 7 }, description: '数学天才：推理无敌，白菜价' },
+                    { id: 'claude', name: 'Claude Opus 4.6', scores: { quality: 9, speed: 6, cost: 4, ease: 7 }, description: '首席合规官：逻辑严谨，审合同利器' },
+                    { id: 'gemini', name: 'Gemini-3-Pro', scores: { quality: 8, speed: 8, cost: 6, ease: 8 }, description: '创意总监：多模态之王，图文视频全能' },
+                    { id: 'glm', name: 'GLM-4.7', scores: { quality: 7, speed: 8, cost: 9, ease: 9 }, description: '中国通特助：中文理解最强，合规无忧' },
+                    { id: 'gpt', name: 'GPT-5', scores: { quality: 9, speed: 7, cost: 3, ease: 8 }, description: '全能 CEO：综合最强，价格最贵' },
+                    { id: 'deepseek', name: 'DeepSeek-R3', scores: { quality: 8, speed: 9, cost: 10, ease: 7 }, description: '数学天才：推理无敌，白菜价' },
                 ],
             },
             dialogue: [
@@ -198,11 +199,10 @@ const lesson2: LessonData = {
         {
             id: 'l2-budget', bg: 'office', game: 'roi-calculator',
             gameProps: {
-                title: 'AI 团队预算计算器',
                 scenario: {
-                    intro: '你打算组建一个 5 人的内容团队。对比纯人工和人机协作的成本。',
-                    defaults: { '人工月薪': 15000, 'AI月费': 200, '效率倍数': 5 },
-                    unit: '元'
+                    title: 'AI 团队预算计算器',
+                    description: '你打算组建一个 5 人的内容团队。对比纯人工和人机协作的成本，看看 AI 能帮你省多少。',
+                    defaults: { employees: 5, monthlySalary: 15000, workHoursPerDay: 8, aiCostPerMonth: 200, aiEfficiencyMultiplier: 5 },
                 }
             },
             dialogue: [
@@ -602,9 +602,9 @@ const lesson6: LessonData = {
             gameProps: {
                 title: 'API 供应商对比',
                 models: [
-                    { name: 'OpenAI (GPT-4)', scores: { quality: 9, price: 2, speed: 6, eco: 9 }, description: '贵族。质量最好，价格最贵，生态最全。' },
-                    { name: 'Anthropic (Claude)', scores: { quality: 8, price: 5, speed: 7, eco: 7 }, description: '长文专家。读长文档便宜又快。' },
-                    { name: 'DeepSeek (V3)', scores: { quality: 7, price: 10, speed: 9, eco: 5 }, description: '价格屠夫。比 GPT-4 便宜 20 倍。性价比首选。' }
+                    { id: 'openai', name: 'OpenAI (GPT-4)', scores: { quality: 9, price: 2, speed: 6, eco: 9 }, description: '贵族。质量最好，价格最贵，生态最全。' },
+                    { id: 'anthropic', name: 'Anthropic (Claude)', scores: { quality: 8, price: 5, speed: 7, eco: 7 }, description: '长文专家。读长文档便宜又快。' },
+                    { id: 'deepseek', name: 'DeepSeek (V3)', scores: { quality: 7, price: 10, speed: 9, eco: 5 }, description: '价格屠夫。比 GPT-4 便宜 20 倍。性价比首选。' }
                 ],
                 dimensions: ['quality', 'price', 'speed', 'eco']
             },
@@ -1378,9 +1378,9 @@ const lesson13: LessonData = {
             gameProps: {
                 title: 'AI 图片生成模型对比',
                 models: [
-                    { name: 'Midjourney', scores: { quality: 9, speed: 7, cost: 5, ease: 8 }, description: '最佳艺术质量，适合品牌视觉' },
-                    { name: 'SDXL', scores: { quality: 8, speed: 9, cost: 9, ease: 6 }, description: '开源免费，批量处理首选' },
-                    { name: 'DALL·E 3', scores: { quality: 7, speed: 8, cost: 6, ease: 9 }, description: '最易上手，适合快速原型' },
+                    { id: 'mj', name: 'Midjourney', scores: { quality: 9, speed: 7, cost: 5, ease: 8 }, description: '最佳艺术质量，适合品牌视觉' },
+                    { id: 'sdxl', name: 'SDXL', scores: { quality: 8, speed: 9, cost: 9, ease: 6 }, description: '开源免费，批量处理首选' },
+                    { id: 'dalle', name: 'DALL·E 3', scores: { quality: 7, speed: 8, cost: 6, ease: 9 }, description: '最易上手，适合快速原型' },
                 ],
                 dimensions: ['quality', 'speed', 'cost', 'ease'],
                 dimensionLabels: { quality: '画质', speed: '速度', cost: '性价比', ease: '易用性' },

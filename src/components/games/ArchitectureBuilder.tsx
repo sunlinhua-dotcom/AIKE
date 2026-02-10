@@ -7,22 +7,28 @@ import { Blocks, CheckCircle2, ArrowRight, RotateCcw } from 'lucide-react';
 interface ArchBlock {
     id: string;
     label: string;
-    layer: number;  // 0=top, 4=bottom
+    layer?: number;
     description: string;
 }
 
 interface ArchitectureBuilderProps {
     title: string;
-    description: string;
-    blocks: ArchBlock[];  // Shuffled
-    correctOrder: string[];  // Top to bottom: ids
-    layerNames: string[];  // ["需求层", "UI层", "API层", "Skills层", "MCP层"]
+    description?: string;
+    instruction?: string;
+    blocks?: ArchBlock[];
+    layers?: ArchBlock[];  // 兼容 lessons 数据格式
+    correctOrder?: string[];
+    layerNames?: string[];
     onComplete?: () => void;
 }
 
 export default function ArchitectureBuilder({
-    title, description, blocks, correctOrder, layerNames, onComplete
+    title, description, instruction, blocks: blocksProp, layers, correctOrder = [], layerNames: layerNamesProp, onComplete
 }: ArchitectureBuilderProps) {
+    // 兼容两种数据格式：blocks 或 layers
+    const blocks = blocksProp || layers || [];
+    const layerNames = layerNamesProp || blocks.map(b => b.label);
+
     const [placed, setPlaced] = useState<(string | null)[]>(Array(layerNames.length).fill(null));
     const [available, setAvailable] = useState<string[]>(blocks.map(b => b.id));
     const [showResult, setShowResult] = useState(false);
@@ -92,9 +98,9 @@ export default function ArchitectureBuilder({
                                 key={i}
                                 onClick={() => removeBlock(i)}
                                 className={`p-3 rounded-lg border transition-all min-h-[48px] flex items-center justify-between ${isCorrect ? 'border-emerald-500/30 bg-emerald-500/10' :
-                                        isWrong ? 'border-red-500/30 bg-red-500/10' :
-                                            block ? 'border-[var(--accent-teal)]/30 bg-[var(--accent-teal-dim)] cursor-pointer' :
-                                                'border-dashed border-[var(--border-hover)] bg-white/[0.01]'
+                                    isWrong ? 'border-red-500/30 bg-red-500/10' :
+                                        block ? 'border-[var(--accent-teal)]/30 bg-[var(--accent-teal-dim)] cursor-pointer' :
+                                            'border-dashed border-[var(--border-hover)] bg-white/[0.01]'
                                     }`}
                                 layout
                             >
@@ -163,8 +169,8 @@ export default function ArchitectureBuilder({
             ) : (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-3">
                     <div className={`p-4 rounded-xl ${placed.every((id, i) => id === correctOrder[i])
-                            ? 'bg-emerald-500/10 border border-emerald-500/20'
-                            : 'bg-amber-500/10 border border-amber-500/20'
+                        ? 'bg-emerald-500/10 border border-emerald-500/20'
+                        : 'bg-amber-500/10 border border-amber-500/20'
                         }`}>
                         <div className="font-semibold text-sm mb-1">
                             {placed.every((id, i) => id === correctOrder[i]) ? '架构正确！' : '需要调整'}

@@ -69,7 +69,7 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
     const [imgLoaded, setImgLoaded] = useState(false);
     const [completionState, setCompletionState] = useState<'none' | 'lesson' | 'course'>('none');
 
-    const { playSfx, toggleMute, isMuted, playBgmForLesson } = useAudioManager();
+    const { playSfx, playSfxForContext, toggleMute, isMuted, playBgmForLesson } = useAudioManager();
 
     const lesson = useMemo(() => allLessons.find(l => l.id === lessonId), [lessonId]);
     const scenes = useMemo(() => lesson?.scenes ?? [], [lesson]);
@@ -107,7 +107,7 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
     const goNext = useCallback(() => {
         if (!currentScene || completionState !== 'none') return;
         const line = currentScene.dialogue[localDialogueIndex];
-        playSfx('click');
+        playSfxForContext('dialogue', lessonId, line?.avatar || 'bot');
 
         // 检查是否为完成动作
         if (line?.action === 'completeLesson') {
@@ -140,9 +140,9 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
             setSceneIndex(prev => prev + 1);
             setLocalDialogueIndex(0);
             nextStep();
-            playSfx('whoosh');
+            playSfxForContext('whoosh', lessonId);
         }
-    }, [currentScene, localDialogueIndex, sceneIndex, scenes, nextStep, addProducerScore, completeLesson, lessonId, playSfx, router, completionState]);
+    }, [currentScene, localDialogueIndex, sceneIndex, scenes, nextStep, addProducerScore, completeLesson, lessonId, playSfx, playSfxForContext, router, completionState]);
 
     const goPrev = useCallback(() => {
         if (localDialogueIndex > 0) {
@@ -152,8 +152,8 @@ export default function LessonPageClient({ lessonId }: LessonPageClientProps) {
             setSceneIndex(prev => prev - 1);
             setLocalDialogueIndex(prevScene.dialogue.length - 1);
         }
-        playSfx('click');
-    }, [localDialogueIndex, sceneIndex, scenes, playSfx]);
+        playSfxForContext('click', lessonId);
+    }, [localDialogueIndex, sceneIndex, scenes, playSfx, playSfxForContext, lessonId]);
 
     // 键盘导航
     useEffect(() => {
