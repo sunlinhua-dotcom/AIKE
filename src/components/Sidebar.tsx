@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { allLessons } from '@/data/lessons';
+import { lessonIndex } from '@/data/lessonIndex';
 import { useGameStore } from '@/store/gameStore';
 import {
     Menu, X, CheckCircle2, Zap,
@@ -60,7 +60,7 @@ export default function Sidebar() {
         return () => { document.body.style.overflow = ''; };
     }, [isOpen]);
 
-    const totalLessons = allLessons.length;
+    const totalLessons = lessonIndex.length;
     const completionPct = totalLessons > 0 ? (lessonsCompleted.length / totalLessons) * 100 : 0;
 
     const sidebarContent = (
@@ -79,7 +79,7 @@ export default function Sidebar() {
             {/* Module Groups */}
             <nav className="flex-1 overflow-y-auto space-y-4">
                 {MODULES.map((mod, mi) => {
-                    const moduleLessons = allLessons.filter(
+                    const moduleLessons = lessonIndex.filter(
                         l => l.id >= mod.range[0] && l.id <= mod.range[1]
                     );
                     return (
