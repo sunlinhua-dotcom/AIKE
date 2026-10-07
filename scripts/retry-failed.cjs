@@ -2,7 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 const API_URL = 'https://api.apiyi.com/v1/images/generations';
-const API_KEY = '***REMOVED***';
+const API_KEY = process.env.APIYI_API_KEY;
+if (!API_KEY) throw new Error('APIYI_API_KEY is not set');
 const MODEL = 'seedream-4-5-251128';
 const SIZE = '2048x2048';
 const STYLE = ', dark executive boardroom aesthetic, deep black and gold color palette, professional business illustration, cinematic lighting, 16:9 aspect ratio, ultra high quality, no text, no watermark';
